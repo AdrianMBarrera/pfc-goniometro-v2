@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<EXERCISE initialId="21" finalId="23">
+  <ang min="0" max="89" />
+  <axis x="10" y="0" z="0" />
+  <ini x="0" y="-3" z="0" />
+  <rotIni x="0" y="180" z="0" />
+  <rotEnd x="270" y="180" z="0" />
+  <reference id="0" x="" y="" z="" />
+  <Restrictions>
+    <Restriction>
+      <initialId>7</initialId>
+      <finalId>8</finalId>
+      <x>1</x>
+      <y>-1</y>
+      <z>-1</z>
+      <rotX>301</rotX>
+      <rotY>180</rotY>
+      <rotZ>320</rotZ>
+      <grade>0</grade>
+    </Restriction>
+  </Restrictions>
+</EXERCISE>
