@@ -626,10 +626,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1937194774}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -33, y: -325}
+  m_SizeDelta: {x: -33, y: 0}
   m_Pivot: {x: .5, y: 1}
 --- !u!114 &236834413
 MonoBehaviour:
@@ -645,6 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabButton: {fileID: 100006, guid: 929115dcffa73c64bb9bb52e42c510bc, type: 2}
   path: ./Exercises
+  sizeButton: 50
 --- !u!222 &236834414
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -655,13 +656,12 @@ CanvasRenderer:
 --- !u!114 &236834415
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 85c19ae01d5333144a8d2ff0fea083f9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1698768757}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 236834411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2095666955, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 1297475563, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -670,12 +670,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 387, y: 40}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
 --- !u!1 &277447582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &660047527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,6 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -3050,7 +3048,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 38282e15e287f1240b2b273cf5e01e24, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 38282e15e287f1240b2b273cf5e01e24, type: 2}
       propertyPath: fadeSpeed
@@ -3830,7 +3828,28 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 22400000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: -33
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11400002, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
   m_RootGameObject: {fileID: 1353062178}
   m_IsPrefabParent: 0
@@ -4677,6 +4696,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:

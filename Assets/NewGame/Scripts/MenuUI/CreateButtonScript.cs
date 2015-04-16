@@ -6,11 +6,13 @@ using System.IO;
 public class CreateButtonScript : MonoBehaviour {
 	public GameObject prefabButton;
 	public string path;
+	public int sizeButton = 50;
 
 	private RectTransform poolTransform; // rectTRansform del pool de los botones
 	// Use this for initialization
 	void Start () {
 		poolTransform = GameObject.Find("buttonPool").GetComponent<RectTransform>();
+
 		ReadXml(path);
 	}
 	
@@ -25,7 +27,7 @@ public class CreateButtonScript : MonoBehaviour {
 //		prefabButton.transform.parent = this.transform;
 		prefabButton.transform.SetParent(this.transform, false);
 
-//		RectTransform rectTransform = prefabButton.GetComponent<RectTransform>();
+		RectTransform rectTransform = prefabButton.GetComponent<RectTransform>();
 //		rectTransform.anchoredPosition = new Vector2 (1f, y);
 //		rectTransform.sizeDelta = new Vector2 (-45,40);
 		prefabButton.name = name;
@@ -37,10 +39,11 @@ public class CreateButtonScript : MonoBehaviour {
 //		Debug.Log("Tamaño pool height " + poolTransform.rect.height);
 //		Debug.Log ("Tamaño height " + rectTransform.rect.height);
 
-//		poolTransform.sizeDelta = new Vector2(poolTransform.sizeDelta.x, poolTransform.sizeDelta.y+rectTransform.rect.height);
-//		poolTransform.anchoredPosition = new Vector2 (0, -(poolTransform.rect.height+rectTransform.rect.height));
+		poolTransform.sizeDelta = new Vector2(poolTransform.sizeDelta.x, poolTransform.sizeDelta.y + sizeButton);
+		poolTransform.anchoredPosition = new Vector2 (0, -(poolTransform.rect.height + sizeButton));
 
-
+		Debug.Log("anchored: " +  poolTransform.anchoredPosition.y);
+		Debug.Log("delta: " +  poolTransform.sizeDelta.y);
 
 	}
 
@@ -56,6 +59,9 @@ public class CreateButtonScript : MonoBehaviour {
 				y -=40;
 			}
 		}
+
+		//poolTransform.sizeDelta = new Vector2(poolTransform.sizeDelta.x, poolTransform.sizeDelta.y +40);
+		//poolTransform.anchoredPosition = new Vector2 (0, poolTransform.anchoredPosition.y + 40);
 
 	}
 }
