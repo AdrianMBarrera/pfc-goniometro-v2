@@ -17,7 +17,10 @@ public class ManagerUIGameScript : MonoBehaviour {
 	
 	private Button exerciseTab;
 	private Button instanceTab;
-	private Button planTab;	
+	private Button planTab;
+
+	private Text helper; // texto de ayuda
+	private LoadingScript loading; // llamar a pasar de nivel
 	
 	// Use this for initialization
 	void Start () {
@@ -32,6 +35,11 @@ public class ManagerUIGameScript : MonoBehaviour {
 		cbNormal = exerciseTab.colors;
 		cbPressed = exerciseTab.colors;
 		cbPressed.normalColor = exerciseTab.colors.pressedColor;
+
+		helper = GameObject.Find("TextHelp").GetComponent<Text>();
+		helper.enabled = false;
+		helper.text = "Please, Select any exercise";
+		loading = GameObject.Find("Veil").GetComponent <LoadingScript>();
 	}
 	
 	// Update is called once per frame
@@ -65,6 +73,30 @@ public class ManagerUIGameScript : MonoBehaviour {
 			instanceTab.colors = cbNormal;
 			planTab.colors= cbPressed;
 		}
+	}
+
+	public void PlayGame (string nameLevel) {
+		if (exerciseI.enabled) {
+			if (InfoPlayer.alExercise.Count < 1)
+				StartCoroutine("HelpCoroutine");
+			else
+				loading.BeginLevel(nameLevel);
+		}
+		
+		/*else if (instanceI.enabled) {
+
+		}
+		
+		else if (planI.enabled) {
+
+		}*/
+
+	}
+
+	IEnumerator HelpCoroutine() {
+		helper.enabled = true;
+		yield return new WaitForSeconds(3f);
+		helper.enabled = false;
 	}
 	
 }

@@ -161,6 +161,7 @@ MonoBehaviour:
   EndSphere: {fileID: 100006, guid: fa0011b6fdbf8c4429825e18fee06ab7, type: 3}
   ReferenceSphere: {fileID: 100006, guid: 6ad9a536da68f6343822526e3b0913c4, type: 3}
   RestrictSphere: {fileID: 0}
+  buttonPool: ButtonPoolPlan
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,9 +24,10 @@ public class MoveDummyScript : MonoBehaviour {
 	List<Pose> poseList = new List<Pose>();  //Lista de restricciones a tener en cuenta durante el ejercicio
 	private Vector3 rotIni; //Rotacion ArtIni
 	private Vector3 rotEnd; //Rotacion ArtFin
+	public string buttonPool;
 
 	void Start () {
-		ButtonPool = GameObject.Find("buttonPool");
+		ButtonPool = GameObject.Find(buttonPool);
 	}
 
 	void Update () {
@@ -36,8 +37,6 @@ public class MoveDummyScript : MonoBehaviour {
 
 	/* Cargar fichero XML del ejercicio y mostrar el movimiento a realizar */
 	public void LoadXml(){
-			
-
 
 		XmlDocument xDoc = new XmlDocument();
 		Debug.Log (Application.dataPath);
@@ -223,7 +222,7 @@ public class MoveDummyScript : MonoBehaviour {
 
 	/* Poner los botones de los movimientos interactuables o no interactuables */
 	void SetStateButtons(bool state){
-		foreach (Transform b  in ButtonPool.transform)
+		foreach (Transform b in ButtonPool.transform)
 			b.GetComponent<Button>().interactable = state;
 	}
 

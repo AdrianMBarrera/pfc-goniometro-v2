@@ -7,11 +7,13 @@ public class CreateButtonScript : MonoBehaviour {
 	public GameObject prefabButton;
 	public string path;
 	public int sizeButton = 50;
+	public GameObject buttonPool;
 
 	private RectTransform poolTransform; // rectTRansform del pool de los botones
+
 	// Use this for initialization
 	void Start () {
-		poolTransform = GameObject.Find("buttonPool").GetComponent<RectTransform>();
+		poolTransform = buttonPool.GetComponent<RectTransform>();
 
 		ReadXml(path);
 	}
