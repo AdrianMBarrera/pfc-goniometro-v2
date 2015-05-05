@@ -31,9 +31,7 @@ public class LoadInstanceScript : MonoBehaviour {
 	public void LoadInstance(){
 
 		XmlDocument xDoc = new XmlDocument();
-		Debug.Log (Application.dataPath);
 		xDoc.Load("./Instances/" + name);
-		Debug.Log(name);
 		XmlNodeList instance = xDoc.GetElementsByTagName("INSTANCE");	
 		nameExercise.text = "Exercise: " +(instance[0].Attributes["name"].InnerText);
 		timeExercise.text = "Time: " + (instance[0].Attributes["time"].InnerText);

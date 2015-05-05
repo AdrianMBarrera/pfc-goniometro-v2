@@ -82,6 +82,7 @@ public class StartPositionScript : MonoBehaviour {
 				hit.collider.gameObject.renderer.material = wood;
 				selectInitial = false;
 				initArt.text = "Initial articulation: ";
+				sphereScript.Art = "";
 			}
 			else if ((selectInitial) && (!selectFinal) && (!hit.collider.gameObject.name.Equals(nameInitialArt))) {
 				nameFinalArt = hit.collider.gameObject.name;
@@ -95,6 +96,7 @@ public class StartPositionScript : MonoBehaviour {
 				hit.collider.gameObject.renderer.material = wood;
 				selectFinal = false;
 				finalArt.text = "Final articulation: ";
+				sphereScript.Art = "";
 			}
 		}
 	

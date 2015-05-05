@@ -72,12 +72,11 @@ public class RestrictionScript : MonoBehaviour {
 			restriction.rotY = (int) Mathf.Round(GameObject.Find(restriction.initialArt).transform.eulerAngles.y);
 			restriction.rotZ = (int) Mathf.Round(GameObject.Find(restriction.initialArt).transform.eulerAngles.z);
 
-			restX.text = "X: "+ restriction.rotX.ToString();
-			restY.text = "Y: "+ restriction.rotY.ToString();
-			restZ.text = "Z: "+ restriction.rotZ.ToString();
-
+			restX.text = "X: " + restriction.rotX.ToString();
+			restY.text = "Y: " + restriction.rotY.ToString();
+			restZ.text = "Z: " + restriction.rotZ.ToString();
 		}
-		else{
+		else {
 			restX.text = "X: ";
 			restY.text = "Y: ";
 			restZ.text = "Z: ";
@@ -86,8 +85,7 @@ public class RestrictionScript : MonoBehaviour {
 
 
 
-	public void AddRestriction(){
-
+	public void AddRestriction() {
 		if ((grades.text != null) && (grades.text.CompareTo("")!= 0))
 			restriction.grade =  int.Parse(grades.text);
 		//Debug.Log ("Restriction " + restriction.initialArt);
@@ -97,8 +95,6 @@ public class RestrictionScript : MonoBehaviour {
 		selectInitial = false;
 		selectFinal = false;
 		sphereScript.Art = "";
-
-
 	}
 
 
@@ -162,11 +158,10 @@ public class RestrictionScript : MonoBehaviour {
 				else if ((selectInitial) && (!selectFinal) &&
 			         (hit.collider.gameObject.name.Equals(restriction.initialArt))) {
 
-					restriction.initialArt ="";
+					restriction.initialArt = "";
 					hit.collider.gameObject.renderer.material = wood;
 					sphereScript.Art = "";
 					selectInitial = false;
-
 				}
 				else if ((selectInitial) && (!selectFinal) &&
 			         (!hit.collider.gameObject.name.Equals(restriction.initialArt))) {
@@ -182,6 +177,7 @@ public class RestrictionScript : MonoBehaviour {
 					restriction.finalArt = "";
 					hit.collider.gameObject.renderer.material = wood;
 					selectFinal = false;
+					sphereScript.Art = "";
 				}
 			}
 

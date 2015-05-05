@@ -1584,9 +1584,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 758473263}
-  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381661, w: .875426114}
-  m_LocalPosition: {x: 561.722656, y: 282.822601, z: -49.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -.454903841, y: .0442645922, z: -.0226464607, w: -.889151454}
+  m_LocalPosition: {x: -14.3999996, y: 3.5, z: -10.0500002}
+  m_LocalScale: {x: 1, y: 1.00000024, z: .999999762}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -4469,6 +4469,7 @@ MonoBehaviour:
   prefabButton: {fileID: 100010, guid: b2bb3be140e3ee946a0ed24422665e84, type: 2}
   path: ./Instances
   sizeButton: 50
+  buttonPool: {fileID: 2014265648}
 --- !u!222 &2014265651
 CanvasRenderer:
   m_ObjectHideFlags: 0

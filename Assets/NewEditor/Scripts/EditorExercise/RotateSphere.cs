@@ -24,7 +24,6 @@ public class RotateSphere : MonoBehaviour {
 			transform.position = new Vector3 (-7f,-10f,0);
 		}
 		
-		
 		if ((!Art.Equals("")) && (Step < 2)) {
 			transform.position = GameObject.Find(Art).transform.position;
 			transform.rotation = GameObject.Find(Art).transform.rotation;
@@ -60,15 +59,15 @@ public class RotateSphere : MonoBehaviour {
 				}
 				
 				if ((selectBlue) && Input.GetMouseButton(0)){
-					transform.Rotate(Vector3.right * Input.GetAxis("Mouse Y") * Speed);
+					transform.Rotate(Vector3.right *- Input.GetAxis("Mouse Y") * Speed);
 					GameObject.Find(Art).transform.rotation = transform.rotation;
 				}
 				if ((selectRed) && Input.GetMouseButton(0)){
-					transform.Rotate(Vector3.down * Input.GetAxis("Mouse X") * Speed);
+					transform.Rotate(Vector3.down * -Input.GetAxis("Mouse Y") * Speed);
 					GameObject.Find(Art).transform.rotation = transform.rotation;
 				}
 				if ((selectGreen) && Input.GetMouseButton(0)){
-					transform.Rotate(Vector3.back * Input.GetAxis("Mouse Y") * Speed);
+					transform.Rotate(Vector3.back * -Input.GetAxis("Mouse Y") * Speed);
 					GameObject.Find(Art).transform.rotation = transform.rotation;
 				}
 				

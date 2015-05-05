@@ -11,7 +11,7 @@ public class MoveDummyScript : MonoBehaviour {
 
 	//Prefabs
 	public GameObject IniSphere;
-	public GameObject EndSphere;
+	//public GameObject EndSphere;
 	public GameObject ReferenceSphere;
 	public GameObject RestrictSphere;
 	private GameObject ButtonPool;
@@ -138,7 +138,7 @@ public class MoveDummyScript : MonoBehaviour {
 
 		//Cargamos las esferas en las articulaciones principales
 		loadSphere(IniSphere, artIni, "IniSphere");
-		loadSphere(EndSphere, artEnd, "EndSphere");
+	//	loadSphere(EndSphere, artEnd, "EndSphere");
 
 		//Se ejecuta el movimiento
 		ShowMovement();
@@ -209,7 +209,7 @@ public class MoveDummyScript : MonoBehaviour {
 
 
 		deleteSphere("IniSphere");
-		deleteSphere ("EndSphere");
+	//	deleteSphere ("EndSphere");
 		SetStateButtons(true);
 
 
@@ -266,7 +266,7 @@ public class MoveDummyScript : MonoBehaviour {
 	public void LoadXml(string name){
 		
 		deleteSphere("IniSphere");
-		deleteSphere ("EndSphere");
+	//	deleteSphere ("EndSphere");
 		
 		XmlDocument xDoc = new XmlDocument();
 		Debug.Log (Application.dataPath);
@@ -368,7 +368,7 @@ public class MoveDummyScript : MonoBehaviour {
 		
 		//Cargamos las esferas en las articulaciones principales
 		loadSphere(IniSphere, artIni, "IniSphere");
-		loadSphere(EndSphere, artEnd, "EndSphere");
+	//	loadSphere(EndSphere, artEnd, "EndSphere");
 		
 		//Se ejecuta el movimiento
 		ShowMovement();
