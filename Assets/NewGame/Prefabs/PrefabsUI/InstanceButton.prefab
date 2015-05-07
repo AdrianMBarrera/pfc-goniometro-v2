@@ -227,7 +227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IniSphere: {fileID: 100006, guid: fa0011b6fdbf8c4429825e18fee06ab7, type: 3}
-  EndSphere: {fileID: 100006, guid: fa0011b6fdbf8c4429825e18fee06ab7, type: 3}
   ReferenceSphere: {fileID: 100006, guid: 6ad9a536da68f6343822526e3b0913c4, type: 3}
   RestrictSphere: {fileID: 0}
   buttonPool: ButtonPoolInstance

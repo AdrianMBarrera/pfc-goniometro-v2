@@ -10,12 +10,13 @@ public class CreateInstanceButtonsScript : MonoBehaviour {
 	public GameObject prefabButton;
 	public int sizeButton = 50;
 	public string path;
-	public GameObject buttonPool;
+	private GameObject buttonPool;
 
 	private RectTransform poolTransform; // rectTRansform del pool de los botones
 
 	// Use this for initialization
 	void Start () {
+		buttonPool = GameObject.Find("ButtonPoolPlanInst");
 		poolTransform = buttonPool.GetComponent<RectTransform>();
 	}
 	
@@ -24,48 +25,48 @@ public class CreateInstanceButtonsScript : MonoBehaviour {
 	
 	}
 
-	public void CreateButton(string name){
+	public void CreateButton(string n){
 		
-		prefabButton = Instantiate(prefabButton,prefabButton.transform.position, Quaternion.identity) as GameObject;
-		Debug.Log ("createbutton");
+		GameObject button = Instantiate(prefabButton, prefabButton.transform.position, Quaternion.identity) as GameObject;
 		//		prefabButton.transform.parent = this.transform;
-		prefabButton.transform.SetParent(buttonPool.transform, false);
-		
-		RectTransform rectTransform = prefabButton.GetComponent<RectTransform>();
+		button.name = n;
+		button.transform.SetParent(buttonPool.transform, false);
+		//button.transform.parent = buttonPool.transform;
+
+		RectTransform rectTransform = button.GetComponent<RectTransform>();
+
 		//		rectTransform.anchoredPosition = new Vector2 (1f, y);
 		//		rectTransform.sizeDelta = new Vector2 (-45,40);
-		prefabButton.name = name;
-		Text t = prefabButton.GetComponentInChildren<Text>();
+
+		Text t = button.GetComponentInChildren<Text>();
 		
-		
-		t.text = name.Substring(0,name.Length-4);
-		//		Debug.Log("Tamaño pool " + poolTransform.sizeDelta.y);
-		//		Debug.Log("Tamaño pool height " + poolTransform.rect.height);
-		//		Debug.Log ("Tamaño height " + rectTransform.rect.height);
+
+		t.text = n.Substring(0,n.Length-4);
+
 		
 		poolTransform.sizeDelta = new Vector2(poolTransform.sizeDelta.x, poolTransform.sizeDelta.y + sizeButton);
 		poolTransform.anchoredPosition = new Vector2 (0, -(poolTransform.rect.height + sizeButton));
-		
-		Debug.Log("anchored: " +  poolTransform.anchoredPosition.y);
-		Debug.Log("delta: " +  poolTransform.sizeDelta.y);
-		
+
+		Destroy(button.transform.FindChild("Toggle").gameObject);
 	}
 
 	public void LoadInstances(){
-		Debug.Log ("loadinstance");
-		
+
+		for (int i = 0; i < buttonPool.transform.childCount; i++) {
+			Destroy(buttonPool.transform.GetChild(i).gameObject);
+		}
+		poolTransform.sizeDelta = new Vector2(poolTransform.sizeDelta.x, -192.6f);
+		poolTransform.anchoredPosition = new Vector2 (0, 0);
+
 		XmlDocument xDoc = new XmlDocument();
 		xDoc.Load("./Plans/" + name);
 		XmlNodeList plan = xDoc.GetElementsByTagName("PLAN");	
-		XmlNodeList listInstances = ((XmlElement)plan[0]).GetElementsByTagName("ScheduleList");
-	
-		int i = 0;
-		foreach (XmlElement instance in listInstances) {
-			Debug.Log ("for");
-			XmlNodeList nodeInstance = instance.GetElementsByTagName("nameInstance");
+		XmlNodeList listInstances = ((XmlElement)plan[0]).GetElementsByTagName("scheduleList");
+		XmlNodeList nodeInstance = xDoc.GetElementsByTagName("nameInstance");
+
+		for (int i = 0; i < nodeInstance.Count; i++) {
 			string nameInstance = nodeInstance[i].InnerText;
 			CreateButton(nameInstance);
-			i++;
 		}
 
 	}

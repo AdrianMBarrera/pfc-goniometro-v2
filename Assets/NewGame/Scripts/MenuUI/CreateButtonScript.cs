@@ -43,10 +43,6 @@ public class CreateButtonScript : MonoBehaviour {
 
 		poolTransform.sizeDelta = new Vector2(poolTransform.sizeDelta.x, poolTransform.sizeDelta.y + sizeButton);
 		poolTransform.anchoredPosition = new Vector2 (0, -(poolTransform.rect.height + sizeButton));
-
-		Debug.Log("anchored: " +  poolTransform.anchoredPosition.y);
-		Debug.Log("delta: " +  poolTransform.sizeDelta.y);
-
 	}
 
 	public void ReadXml(string path){
