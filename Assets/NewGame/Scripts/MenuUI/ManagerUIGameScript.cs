@@ -21,7 +21,14 @@ public class ManagerUIGameScript : MonoBehaviour {
 
 	private Text helper; // texto de ayuda
 	private LoadingScript loading; // llamar a pasar de nivel
-	
+	private RectTransform infoInstanceRT;
+	private GameObject infoInstancePanel;
+
+	private Text nameExerciseText;
+	private Text nameInstanceText;
+	private Text repetitionsText;
+	private Text timeText;
+
 	// Use this for initialization
 	void Start () {
 		exerciseI = GameObject.Find("InterfaceExercise").GetComponent<Canvas>();
@@ -40,6 +47,14 @@ public class ManagerUIGameScript : MonoBehaviour {
 		helper.enabled = false;
 		helper.text = "Please, Select any exercise";
 		loading = GameObject.Find("Veil").GetComponent <LoadingScript>();
+
+		infoInstancePanel = GameObject.Find("InfoInstance");
+		infoInstanceRT = infoInstancePanel.GetComponent<RectTransform>();
+
+		nameExerciseText = GameObject.Find("ExerciseName").GetComponent<Text>();
+		nameInstanceText = GameObject.Find("InstanceName").GetComponent<Text>();
+		repetitionsText = GameObject.Find("InstanceRep").GetComponent<Text>();
+		timeText = GameObject.Find("InstanceTime").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -52,6 +67,10 @@ public class ManagerUIGameScript : MonoBehaviour {
 			exerciseTab.colors = cbPressed;
 			instanceTab.colors = cbNormal;
 			planTab.colors= cbNormal;
+
+			infoInstancePanel.GetComponent<Canvas>().enabled =false;
+
+
 		}
 		
 		if (instanceI.enabled) {
@@ -62,6 +81,15 @@ public class ManagerUIGameScript : MonoBehaviour {
 			exerciseTab.colors = cbNormal;
 			instanceTab.colors = cbPressed;
 			planTab.colors= cbNormal;
+			infoInstanceRT.anchorMin = new Vector2 (0,0.15f);
+			infoInstanceRT.anchorMax = new Vector2 (0.45f,0.35f);
+
+			infoInstanceRT.sizeDelta = new Vector2 (0,0);
+			infoInstanceRT.anchoredPosition = new Vector2 (0,0);
+
+			infoInstancePanel.GetComponent<Canvas>().enabled =true;
+
+
 		}
 		
 		if (planI.enabled) {
@@ -72,6 +100,14 @@ public class ManagerUIGameScript : MonoBehaviour {
 			exerciseTab.colors = cbNormal;
 			instanceTab.colors = cbNormal;
 			planTab.colors= cbPressed;
+			infoInstanceRT.anchorMin = new Vector2 (0.5f, 0.8f);
+			infoInstanceRT.anchorMax = new Vector2 (0.95f,0.98f);
+
+			infoInstanceRT.sizeDelta = new Vector2 (0,0);
+			infoInstanceRT.anchoredPosition = new Vector2 (0,0);
+			infoInstancePanel.GetComponent<Canvas>().enabled =true;
+
+			
 		}
 	}
 
@@ -97,6 +133,13 @@ public class ManagerUIGameScript : MonoBehaviour {
 		helper.enabled = true;
 		yield return new WaitForSeconds(3f);
 		helper.enabled = false;
+	}
+
+	public void CleanInfoInstancePanel() {
+		nameExerciseText.text = "Exercise: ";
+		nameInstanceText.text = "Instance: ";
+		repetitionsText.text = "Repetitions: ";
+		timeText.text = "Time: ";
 	}
 	
 }
