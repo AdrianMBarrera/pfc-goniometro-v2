@@ -110,28 +110,28 @@ public class ZigSkeleton : MonoBehaviour
 
         transforms[(int)ZigJointId.Head] = Head;
         transforms[(int)ZigJointId.Neck] = Neck;
-        transforms[(int)ZigJointId.Torso] = Torso;
-        transforms[(int)ZigJointId.Waist] = Waist;
-        transforms[(int)ZigJointId.LeftCollar] = LeftCollar;
+    //    transforms[(int)ZigJointId.Torso] = Torso;
+        //transforms[(int)ZigJointId.Waist] = Waist;
+        //transforms[(int)ZigJointId.LeftCollar] = LeftCollar;
         transforms[(int)ZigJointId.LeftShoulder] = LeftShoulder;
         transforms[(int)ZigJointId.LeftElbow] = LeftElbow;
         transforms[(int)ZigJointId.LeftWrist] = LeftWrist;
         transforms[(int)ZigJointId.LeftHand] = LeftHand;
-        transforms[(int)ZigJointId.LeftFingertip] = LeftFingertip;
-        transforms[(int)ZigJointId.RightCollar] = RightCollar;
+  //      transforms[(int)ZigJointId.LeftFingertip] = LeftFingertip;
+        //transforms[(int)ZigJointId.RightCollar] = RightCollar;
         transforms[(int)ZigJointId.RightShoulder] = RightShoulder;
         transforms[(int)ZigJointId.RightElbow] = RightElbow;
         transforms[(int)ZigJointId.RightWrist] = RightWrist;
         transforms[(int)ZigJointId.RightHand] = RightHand;
-        transforms[(int)ZigJointId.RightFingertip] = RightFingertip;
+     //   transforms[(int)ZigJointId.RightFingertip] = RightFingertip;
         transforms[(int)ZigJointId.LeftHip] = LeftHip;
         transforms[(int)ZigJointId.LeftKnee] = LeftKnee;
-        transforms[(int)ZigJointId.LeftAnkle] = LeftAnkle;
-        transforms[(int)ZigJointId.LeftFoot] = LeftFoot;
+     //   transforms[(int)ZigJointId.LeftAnkle] = LeftAnkle;
+      //  transforms[(int)ZigJointId.LeftFoot] = LeftFoot;
         transforms[(int)ZigJointId.RightHip] = RightHip;
         transforms[(int)ZigJointId.RightKnee] = RightKnee;
-        transforms[(int)ZigJointId.RightAnkle] = RightAnkle;
-        transforms[(int)ZigJointId.RightFoot] = RightFoot;
+      //  transforms[(int)ZigJointId.RightAnkle] = RightAnkle;
+      //  transforms[(int)ZigJointId.RightFoot] = RightFoot;
 
 
 

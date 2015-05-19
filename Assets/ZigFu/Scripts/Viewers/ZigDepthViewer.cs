@@ -22,7 +22,7 @@ public class ResolutionData
         switch (res) {
             default: //fallthrough - default to QQVGA
             case ZigResolution.QQVGA_160x120:
-                return new ResolutionData(160, 120);
+                return new ResolutionData(1, 1);
             case ZigResolution.QVGA_320x240:
                 return new ResolutionData(320, 240);
             case ZigResolution.VGA_640x480:
