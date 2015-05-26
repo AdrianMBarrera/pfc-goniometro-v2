@@ -48,11 +48,14 @@ public class Zig : MonoBehaviour {
     void Zig_UserFound(ZigTrackedUser user) {
         if (Verbose) Debug.Log("Zig: Found user  " + user.Id);
         notifyListeners("Zig_UserFound", user);
+		GameManager.instance.stateOfGame = 2; //codigo añadido volviendo a ingame
     }
 
     void Zig_UserLost(ZigTrackedUser user) {
         if (Verbose) Debug.Log("Zig: Lost user " + user.Id);
         notifyListeners("Zig_UserLost", user);
+
+		GameManager.instance.stateOfGame = 0; //codigo añadido
     }
 
     void Zig_Update(ZigInput zig) {
