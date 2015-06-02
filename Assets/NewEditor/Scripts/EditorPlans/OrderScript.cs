@@ -9,7 +9,7 @@ public class OrderScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		toggle = GetComponent<Toggle>();
-		mo = GameObject.Find("ManagerOrder").GetComponent<ManagerOrderScript>();
+		mo = GameObject.Find("UI").GetComponent<ManagerOrderScript>();
 	}
 	
 	// Update is called once per frame
@@ -24,14 +24,10 @@ public class OrderScript : MonoBehaviour {
 		}
 		else{
 			mo.maxExercises--;
-
 		}
 	}
 
 
-
-
-	
 	public void ReOrder(){
 
 

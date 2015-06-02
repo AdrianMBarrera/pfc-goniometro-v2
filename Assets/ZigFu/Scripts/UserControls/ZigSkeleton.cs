@@ -219,14 +219,27 @@ public class ZigSkeleton : MonoBehaviour
         }
 
         // calibration pose is skeleton base pose ("T") with both elbows bent in 90 degrees
-        if (null != RightElbow)
+        /*if (null != RightElbow)
         {
             RightElbow.rotation = transform.rotation * Quaternion.Euler(0, -90, 90) * initialRotations[(int)ZigJointId.RightElbow];
         }
         if (null != LeftElbow)
         {
             LeftElbow.rotation = transform.rotation * Quaternion.Euler(0, 90, -90) * initialRotations[(int)ZigJointId.LeftElbow];
-        }
+//			LeftElbow.rotation = transform.rotation * Quaternion.Euler(0, 0, 90) * initialRotations[(int)ZigJointId.LeftElbow];
+
+        }*/
+
+		if (null != RightShoulder)
+		{
+			RightShoulder.rotation = transform.rotation * Quaternion.Euler(0, 0, -80) * initialRotations[(int)ZigJointId.RightShoulder];
+		}
+
+		if (null != LeftShoulder)
+		{
+			LeftShoulder.rotation = transform.rotation * Quaternion.Euler(0, 0, 80) * initialRotations[(int)ZigJointId.LeftShoulder];
+		}
+
     }
 
     public void SetRootPositionBias()
