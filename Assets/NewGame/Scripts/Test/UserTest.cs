@@ -9,7 +9,6 @@ public class UserTest : MonoBehaviour {
 
 	ZigSkeleton zs;
 
-	public bool Angle = false;
 	public bool plano = true;
 	public bool barra = true;	
 	public int arti, arti1, inicio, eje = 0;

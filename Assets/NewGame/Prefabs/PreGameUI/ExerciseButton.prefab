@@ -180,7 +180,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400008}
-        m_MethodName: LoadXml
+        m_MethodName: LoadExercise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -204,10 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c78e65c5cc23e4aa2f7dbcf48da622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IniSphere: {fileID: 100006, guid: 1233334d4956e5541800619c42859338, type: 3}
-  ReferenceSphere: {fileID: 100006, guid: 1233334d4956e5541800619c42859338, type: 3}
-  RestrictSphere: {fileID: 0}
-  buttonPool: ButtonPoolExercise
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

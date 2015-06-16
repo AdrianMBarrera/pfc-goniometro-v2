@@ -113,7 +113,7 @@ public class StartPositionScript : MonoBehaviour {
 			ini = GameObject.Find(exercise.finalArt).transform.position 
 				- GameObject.Find(exercise.initialArt).transform.position;
 
-			rotIni = GameObject.Find(exercise.initialArt).transform.eulerAngles;
+			rotIni = GameObject.Find(exercise.initialArt).transform.rotation.eulerAngles;
 
 			//exercise.ang.Min = Mathf.Round(GameObject.Find(exercise.initialArt).transform.rotation.eulerAngles.x).ToString();
 			//exercise.ang.Max = Mathf.Round(GameObject.Find(exercise.initialArt).transform.rotation.eulerAngles.x).ToString();

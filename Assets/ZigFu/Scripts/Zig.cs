@@ -48,14 +48,19 @@ public class Zig : MonoBehaviour {
     void Zig_UserFound(ZigTrackedUser user) {
         if (Verbose) Debug.Log("Zig: Found user  " + user.Id);
         notifyListeners("Zig_UserFound", user);
-	//	GameManager.instance.stateOfGame = 2; //codigo añadido volviendo a ingame
+
+		//Si estas en Calibration y la Kinect encuentra al usuario, pasamos a InGame
+		if (GameManager.instance.stateOfGame == GameManager.statesOfGame.Calibration)
+			GameManager.instance.DoExercise(); //codigo añadido volviendo a ingame
     }
 
     void Zig_UserLost(ZigTrackedUser user) {
         if (Verbose) Debug.Log("Zig: Lost user " + user.Id);
         notifyListeners("Zig_UserLost", user);
 
-	//	GameManager.instance.stateOfGame = 0; //codigo añadido
+		//Si estas en InGame y la Kinect pierde al usuario, pasamos a Calibration
+		if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame)
+			GameManager.instance.Calibrate(); //codigo añadido
     }
 
     void Zig_Update(ZigInput zig) {

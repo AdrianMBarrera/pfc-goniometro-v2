@@ -31,7 +31,7 @@ public class ManagerPreGameUI : MonoBehaviour {
 
 	private Animator _anim;
 
-
+	private Button _playButton;
 
 	void OnEnable(){
 		GameManager.OnLoadGamePhase += LoadGame;
@@ -39,9 +39,9 @@ public class ManagerPreGameUI : MonoBehaviour {
 	}
 	
 	void OnDisable(){
-		
+
 		GameManager.OnLoadGamePhase -= LoadGame;
-		
+
 	}
 
 	// Use this for initialization
@@ -71,6 +71,8 @@ public class ManagerPreGameUI : MonoBehaviour {
 		_repetitionsText = GameObject.Find("InstanceRep").GetComponent<Text>();
 		_timeText = GameObject.Find("InstanceTime").GetComponent<Text>();
 
+		_playButton = GameObject.Find("PlayButton").GetComponent<Button>();
+
 		_anim = GetComponent<Animator>();
 	}
 	
@@ -86,6 +88,9 @@ public class ManagerPreGameUI : MonoBehaviour {
 			_planTab.colors= _cbNormal;
 
 			_infoInstancePanel.GetComponent<Canvas>().enabled =false;
+
+
+			CheckPlay();
 
 
 		}
@@ -132,6 +137,7 @@ public class ManagerPreGameUI : MonoBehaviour {
 		}
 	}
 
+
 	public void PlayGame (string nameLevel) {
 		if (_exerciseI.enabled) {
 			if (InfoPlayer.alExercise.Count < 1)
@@ -145,7 +151,6 @@ public class ManagerPreGameUI : MonoBehaviour {
 		}
 		
 		else if (planI.enabled) {
-
 		}*/
 
 	}
@@ -156,6 +161,7 @@ public class ManagerPreGameUI : MonoBehaviour {
 		_helper.enabled = false;
 	}
 
+
 	public void CleanInfoInstancePanel() {
 		_nameExerciseText.text = "Exercise: ";
 		_nameInstanceText.text = "Instance: ";
@@ -164,15 +170,26 @@ public class ManagerPreGameUI : MonoBehaviour {
 	}
 
 
-
-
+	//lanzamos la animacion de ocultar el canvas
 	void LoadGame(){
 		_anim.enabled = true;
 	}
 
 
+	//comprobamos si se puede pulsar el boton play
+
+	void CheckPlay(){
+
+		if (InfoPlayer.alExercise.Count != 0){
+			_playButton.interactable = true;
+
+		}else{
+			_playButton.interactable = false;
+
+		}
+
+	}
 
 
-	
 }
 

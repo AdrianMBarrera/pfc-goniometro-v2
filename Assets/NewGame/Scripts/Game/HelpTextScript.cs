@@ -16,14 +16,17 @@ public class HelpTextScript : MonoBehaviour {
 
 
 	void OnEnable(){
-		GameManager.OnLoadGamePhase += LoadGame;
+		GameManager.OnDemostrationPhase += LoadGame;
+		GameManager.OnInGamePhase += DoExercise;
+		GameManager.OnCalibrationPhase += Calibrate;
 		
 	}
 	
 	void OnDisable(){
 		
-		GameManager.OnLoadGamePhase -= LoadGame;
-		
+		GameManager.OnDemostrationPhase -= LoadGame;
+		GameManager.OnInGamePhase -= DoExercise;
+		GameManager.OnCalibrationPhase -= Calibrate;
 	}
 
 	
@@ -33,13 +36,13 @@ public class HelpTextScript : MonoBehaviour {
 
 
 
-		if ((GameManager.instance.stateOfGame == (int)GameManager.statesOfGame.InGame) &&
+		if ((GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame) &&
 			(helpText.enabled)){
 
 			helpText.enabled = false;
 		}else
 
-		if ((GameManager.instance.stateOfGame != (int)GameManager.statesOfGame.InGame) &&
+		if ((GameManager.instance.stateOfGame != GameManager.statesOfGame.InGame) &&
 		    (!helpText.enabled)){
 			
 			helpText.enabled = true;
@@ -51,17 +54,21 @@ public class HelpTextScript : MonoBehaviour {
 
 	void LoadGame(){
 
-		StartCoroutine("WaitLoad");
+		helpText.text = "Show the exercise";
 
 	}
 
 
-
-	IEnumerator WaitLoad(){
-
-		yield return new WaitForSeconds (2f);
-		helpText.text = "Please take position";
+	void DoExercise(){
+		
+		helpText.text = "";
+		
 	}
+
+	void Calibrate() {
+		helpText.text = "Please, take position";
+	}
+
 
 
 

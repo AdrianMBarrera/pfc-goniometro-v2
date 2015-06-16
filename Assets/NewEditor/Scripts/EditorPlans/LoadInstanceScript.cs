@@ -5,8 +5,7 @@ using System.Xml;
 
 
 public class LoadInstanceScript : MonoBehaviour {
-
-	private MoveDummyScript moveDummyScript;
+	
 	private Text nameExercise;
 	private Text timeExercise;
 	private Text repetitionExercise;
@@ -14,8 +13,6 @@ public class LoadInstanceScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-		moveDummyScript = GetComponent<MoveDummyScript>();
 		nameExercise = GameObject.Find("ExerciseName").GetComponent<Text>();
 		timeExercise = GameObject.Find("InstanceTime").GetComponent<Text>();
 		repetitionExercise = GameObject.Find("InstanceRep").GetComponent<Text>();
@@ -36,7 +33,7 @@ public class LoadInstanceScript : MonoBehaviour {
 		nameExercise.text = "Exercise: " +(instance[0].Attributes["name"].InnerText);
 		timeExercise.text = "Time: " + (instance[0].Attributes["time"].InnerText);
 		repetitionExercise.text = "Repetitions: " + (instance[0].Attributes["repetitions"].InnerText);
-		moveDummyScript.LoadXml(instance[0].Attributes["name"].InnerText);
+		DummyManager.instance.LoadXml(instance[0].Attributes["name"].InnerText);
 
 	}
 

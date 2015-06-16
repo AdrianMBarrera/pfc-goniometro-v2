@@ -52,7 +52,7 @@ public class FinalPositionScript : MonoBehaviour {
 			fin = GameObject.Find(exercise.finalArt).transform.position - 
 				GameObject.Find(exercise.initialArt).transform.position;
 
-			rotFin = GameObject.Find(exercise.initialArt).transform.eulerAngles;
+			rotFin = GameObject.Find(exercise.initialArt).transform.rotation.eulerAngles;
 		}
 
 		min.text = "Min: " + exercise.ang.Min;
@@ -60,9 +60,7 @@ public class FinalPositionScript : MonoBehaviour {
 		
 	}
 
-
-
-
+	
 
 	public void PassToManager() {
 

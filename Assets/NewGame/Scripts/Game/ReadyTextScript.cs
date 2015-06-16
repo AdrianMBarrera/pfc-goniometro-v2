@@ -7,7 +7,7 @@ public class ReadyTextScript : MonoBehaviour {
 	private Animator readyAnim;
 
 	void OnEnable(){
-		
+		//GameManager.OnLoadGamePhase += ReadyAnimation;
 		GameManager.OnInGamePhase += ReadyAnimation;
 		
 	}

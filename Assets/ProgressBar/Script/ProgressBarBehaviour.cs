@@ -163,7 +163,7 @@ namespace ProgressBar
         public void SetFillerSizeAsPercentage(float Percent)
         {
             m_Value.Set(m_FillerInfo.MaxWidth * Percent / 100);
-
+            
             if (Value < 0) Value = 0;
             else if (Value > 100) Value = 100;
         }

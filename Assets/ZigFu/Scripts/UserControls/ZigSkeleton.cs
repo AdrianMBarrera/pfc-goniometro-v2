@@ -48,6 +48,8 @@ public class ZigSkeleton : MonoBehaviour
     private Quaternion[] initialRotations;
     private Vector3 rootPosition;
 
+	UserTest ut;
+
     ZigJointId mirrorJoint(ZigJointId joint)
     {
         switch (joint)
@@ -151,6 +153,8 @@ public class ZigSkeleton : MonoBehaviour
 
     void Start()
     {
+		ut = gameObject.GetComponent<UserTest>();
+
         // start out in calibration pose
         if (RotateToPsiPose)
         {
@@ -262,6 +266,10 @@ public class ZigSkeleton : MonoBehaviour
                 if (joint.GoodPosition) UpdatePosition(joint.Id, joint.Position);
                 if (joint.GoodRotation) UpdateRotation(joint.Id, joint.Rotation);
             }
+			if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame) {		
+				//ut.Cargar(); //lee el fichero de definiciones
+				ut.Medir();
+			}
         }
     }
 

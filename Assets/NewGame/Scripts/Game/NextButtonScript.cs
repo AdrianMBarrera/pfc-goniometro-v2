@@ -7,17 +7,9 @@ public class NextButtonScript : MonoBehaviour {
 	//private Animator _anim;
 	
 	private Image _img;
-	
-//	void OnEnable(){
-//		GameManager.OnLoadGamePhase += LoadGame;
-//		
-//	}
-//	
-//	void OnDisable(){
-//		
-//		GameManager.OnLoadGamePhase -= LoadGame;
-//		
-//	}
+
+	private Text _text;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -26,27 +18,57 @@ public class NextButtonScript : MonoBehaviour {
 		
 		_img = GetComponent<Image>();
 		_img.enabled = false;
+		_text = GetComponentInChildren <Text>();
+		_text.enabled = false;
 	}
-	
+
+
+
+	void OnEnable(){
+		GameManager.OnCalibrationPhase += SetOn;
+		GameManager.OnInGamePhase += SetOn;
+		GameManager.OnDemostrationPhase += SetOff;
+	}
+
+	void OnDisable(){
+		GameManager.OnCalibrationPhase -= SetOn;
+		GameManager.OnInGamePhase -= SetOn;
+		GameManager.OnDemostrationPhase -= SetOff;
+
+
+	}
+
+
+
+
 	// Update is called once per frame
 	void Update () {
-		
-		if ((GameManager.instance.stateOfGame == (int)GameManager.statesOfGame.InGame) &&
-		    (_img.enabled)){
-			
-			_img.enabled = true;
-		}else
-			
-			if ((GameManager.instance.stateOfGame != (int)GameManager.statesOfGame.InGame) &&
-			   (!_img.enabled)){
-			
-			_img.enabled = false;
-		}
+
 	}
-	
-//	void LoadGame(){
-//		
-//	//	_anim.enabled = true;
-//	}
+
+
+
+	void SetOff(){
+
+		_img.enabled = false;
+		_text.enabled = false;
+
+	}
+
+
+	void SetOn(){
+
+		_img.enabled = true;
+		_text.enabled =true;
+
+		if (GameManager.instance.currentExercise+1 < InfoPlayer.alExercise.Count) {
+			_text.text = "Next >";
+		}
+		else {
+			_text.text = "End";
+		}
+
+	}
+
 
 }

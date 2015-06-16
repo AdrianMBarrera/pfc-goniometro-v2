@@ -4,29 +4,39 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
 	SkinnedMeshRenderer mr;
-	
-	
+
+
+
+
 	void OnEnable(){
-		GameManager.OnLoadGamePhase += LoadGame;
-		
+		GameManager.OnDemostrationPhase += SetOff;
+		GameManager.OnCalibrationPhase += SetOff;
+		GameManager.OnInGamePhase += SetOn;
 	}
 	
 	void OnDisable(){
-		
-		GameManager.OnLoadGamePhase -= LoadGame;
-		
-	}
-	
-	
-	void LoadGame(){
-		mr.enabled = true;
+		GameManager.OnInGamePhase -= SetOn;
+		GameManager.OnDemostrationPhase -= SetOff;
+		GameManager.OnCalibrationPhase -= SetOff;
 	}
 	
 	// Use this for initialization
 	void Start () {
 		
 		mr = GetComponentInChildren<SkinnedMeshRenderer>();
+
 	}
+
+	void SetOff(){
+		mr.enabled = false;
+
+	}
+
+	void SetOn(){
+		mr.enabled = true;
+
+	}
+
 	
 	// Update is called once per frame
 	void Update () {

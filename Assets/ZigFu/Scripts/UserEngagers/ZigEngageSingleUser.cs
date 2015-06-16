@@ -68,6 +68,7 @@ public class ZigEngageSingleUser : MonoBehaviour {
         }
     }
 
+
     public void Reset() {
         if (null != engagedTrackedUser) {
             DisengageUser(engagedTrackedUser);

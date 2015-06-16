@@ -33,7 +33,7 @@ public class CreateInstanceButtonsScript : MonoBehaviour {
 		button.transform.SetParent(buttonPool.transform, false);
 		//button.transform.parent = buttonPool.transform;
 
-		RectTransform rectTransform = button.GetComponent<RectTransform>();
+
 
 		//		rectTransform.anchoredPosition = new Vector2 (1f, y);
 		//		rectTransform.sizeDelta = new Vector2 (-45,40);
@@ -60,8 +60,8 @@ public class CreateInstanceButtonsScript : MonoBehaviour {
 
 		XmlDocument xDoc = new XmlDocument();
 		xDoc.Load("./Plans/" + name);
-		XmlNodeList plan = xDoc.GetElementsByTagName("PLAN");	
-		XmlNodeList listInstances = ((XmlElement)plan[0]).GetElementsByTagName("scheduleList");
+//		XmlNodeList plan = xDoc.GetElementsByTagName("PLAN");	
+//		XmlNodeList listInstances = ((XmlElement)plan[0]).GetElementsByTagName("scheduleList");
 		XmlNodeList nodeInstance = xDoc.GetElementsByTagName("nameInstance");
 
 		for (int i = 0; i < nodeInstance.Count; i++) {
