@@ -149,7 +149,15 @@ public class SaveScript : MonoBehaviour {
 		
 		if (!exercise.initialArt.Equals("")) {
 			GameObject.Find(exercise.initialArt).renderer.material = wood;
-			GameObject.Find(exercise.initialArt).transform.eulerAngles = new Vector3(0,180,0);
+			if ((exercise.initialArt.Equals("RightKnee")) || (exercise.initialArt.Equals("LeftKnee"))){
+				GameObject.Find(exercise.initialArt).transform.localEulerAngles = new Vector3(0,180f,0);
+
+			}else{
+				GameObject.Find(exercise.initialArt).transform.eulerAngles = new Vector3(0,180f,0);
+
+			}
+
+
 		}
 
 		sphereScript.Art = ""; // para poner la esfera fuera de la articulacion
@@ -165,7 +173,7 @@ public class SaveScript : MonoBehaviour {
 		foreach (Restriction r in exercise.Restrictions) {
 			GameObject.Find(r.initialArt).renderer.material = wood;
 			GameObject.Find(r.finalArt).renderer.material = wood;
-			GameObject.Find(r.initialArt).transform.eulerAngles = new Vector3(0,180,0);
+			GameObject.Find(r.initialArt).transform.eulerAngles = new Vector3(0,180f,0);
 		}
 
 		GameObject.Find("ManagerInterface").GetComponent<ManagerExerciseEditor>().exercise = new Exercise();
