@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
 
+	public GameObject restrictSphere;
+	public GameObject[] rsArray;
+
 	ZigEngageSingleUser zesu;
 	public GameObject zigfu;
 
@@ -25,6 +28,11 @@ public class GameManager : MonoBehaviour {
 
 	public float TotalTime = 0;
 
+	[Tooltip("Tamaño 15.\n0. Head\n1. Neck\n2. Spine1\n3. JointLeftArm\n4. JointLeftForeArm\n5. JointLeftHand\n" +
+	         "6. JointRightArm\n7. JointRightForeArm\n8. JointRightHand\n9. LeftUpLeg\n10. JointLeftLeg\n11. LeftFoot\n" +
+	         "12. RightUpLeg\n13. JointRightLeg\n14. RightFoot")]
+	public GameObject[] articulations;
+
 	public InfoPlayer.gameModes gameMode = InfoPlayer.gameModes.None;
 
 	//Variables para la medicion del ejercicio
@@ -32,9 +40,7 @@ public class GameManager : MonoBehaviour {
 	public int artIni, artEnd = 0;
 	public float minimo, maximo;
 	public Vector3 plane, initBone;
-	public List<Pose> poseList = new List<Pose>();  //Lista de restricciones a tener en cuenta durante el ejercicio
-
-
+	public List<Pose> poseList;  //Lista de restricciones a tener en cuenta durante el ejercicio
 
 	public delegate void LoadGamePhase();
 	public static event LoadGamePhase OnLoadGamePhase;
@@ -69,6 +75,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		poseList = new List<Pose>();
 
 		InfoPlayer.gameModes mode = (InfoPlayer.gameModes) gameMode;
 
@@ -174,32 +181,24 @@ public class GameManager : MonoBehaviour {
 
 	//Traductor entre los joints del fichero de definicion y el skeleton de kinect
 	public Transform art(int op) {
+		//Debug.Log ("Articulacion" + op);
 		switch (op) {
-		case 1:	return zs.Head;
-		case 2: return zs.Neck;
-		case 3: return zs.Torso;
-		case 4: return zs.Waist;
-		case 5: return zs.LeftCollar;
-		case 6: return zs.LeftShoulder;
-		case 7: return zs.LeftElbow;
-		case 8: return zs.LeftWrist;
-		case 9: return zs.LeftHand;
-		case 10: return zs.LeftFingertip;
-		case 11: return zs.RightCollar;
-		case 12: return zs.RightShoulder;
-		case 13: return zs.RightElbow;
-		case 14: return zs.RightWrist;
-		case 15: return zs.RightHand;
-		case 16: return zs.RightFingertip;
-		case 17: return zs.LeftHip;
-		case 18: return zs.LeftKnee;
-		case 19: return zs.LeftAnkle;
-		case 20: return zs.LeftFoot;
-		case 21: return zs.RightHip;
-		case 22: return zs.RightKnee;
-		case 23: return zs.RightAnkle;
-		case 24: return zs.RightFoot;
-		default: return zs.RightKnee;
+			case 1:	return articulations[0].transform;
+			case 2: return articulations[1].transform;
+			case 3: return articulations[2].transform;
+			case 6: return articulations[3].transform;
+			case 7: return articulations[4].transform;
+			case 8: return articulations[5].transform;
+			case 12: return articulations[6].transform;
+			case 13: return articulations[7].transform;
+			case 14: return articulations[8].transform;
+			case 17: return articulations[9].transform;
+			case 18: return articulations[10].transform;
+			case 19: return articulations[11].transform;
+			case 21: return articulations[12].transform;
+			case 22: return articulations[13].transform;
+			case 23: return articulations[14].transform;
+			default: return articulations[0].transform;
 		}
 	}
 
@@ -247,9 +246,11 @@ public class GameManager : MonoBehaviour {
 		Vector3 proyectBone = new Vector3();
 		Vector3 proyectBone1 = new Vector3();
 		Vector3 productVect1 = new Vector3();
-		
+
+
 		productVect = ProdVec(bone, plane);
 		proyectBone = ProdVec(plane, productVect); //proyeccion sobre el plano del vector a medir
+		//Debug.Log ("Proyect Bone: " + proyectBone);
 		
 		productVect = ProdVec(initBone, plane);
 		proyectBone1 = ProdVec(plane, productVect);// proyeccion sobre el plano del vector de inicio
@@ -261,10 +262,14 @@ public class GameManager : MonoBehaviour {
 		float ModuleProyect = Mathf.Sqrt(proyectBone.x * proyectBone.x +
 		                                 proyectBone.y * proyectBone.y + 
 		                                 proyectBone.z * proyectBone.z);
+
+		//Debug.Log ("peppe: " + proyectBone.x);
 		
 		float ModuleProyect1 = Mathf.Sqrt(proyectBone1.x * proyectBone1.x + 
 		                                  proyectBone1.y * proyectBone1.y + 
 		                                  proyectBone1.z * proyectBone1.z);
+		//Debug.Log ("Module:" + ModuleProyect);
+		//Debug.Log ("Module1: " + ModuleProyect1);
 		
 		float cos = scalarProduct / (ModuleProyect * ModuleProyect1);
 		
@@ -274,8 +279,32 @@ public class GameManager : MonoBehaviour {
 		float scalarProduct1 = proyectBone1.x * productVect1.x + proyectBone1.y * productVect1.y + proyectBone1.z * productVect1.z;		
 		
 		if (scalarProduct1 < 0) angulo = -angulo;
-		
 		return angulo;	
+	}
+
+	public void restricciones() {
+		//restricciones definidas para cada ejercicio
+
+
+		int i = 0;
+		foreach (Pose pose in poseList) {
+			
+			Transform aux = art(pose.GetArt());
+			Transform aux1 = art(pose.GetArt1());
+			
+			Vector3 bone1 = new Vector3(distance(aux1.position.x, aux.position.x), 
+			                            distance(aux1.position.y, aux.position.y),
+			                            distance(aux1.position.z, aux.position.z));
+			
+			//texto.text = bone1.GetX().ToString()+" "+bone1.GetY().ToString()+" "+bone1.GetZ().ToString();
+			if (CalcAngle(bone1, pose.GetBone()) < pose.GetGrado()) {
+				rsArray[i].renderer.material.color = new Color(0, 255f, 0, 160f);
+			}
+			else {
+				rsArray[i].renderer.material.color = new Color(255f, 0, 0, 160f);
+			}
+			i++;
+		}
 	}
 
 	public void Medir() {       
@@ -285,17 +314,20 @@ public class GameManager : MonoBehaviour {
 		Vector3 joint = new Vector3 (aux.position.x, aux.position.y, aux.position.z);
 //		joint.SetName(aux.ToString());
 		
-		Vector3 joint1 = new Vector3 (aux.position.x, aux.position.y, aux.position.z);
+		Vector3 joint1 = new Vector3 (aux1.position.x, aux1.position.y, aux1.position.z);
 //		joint1.SetName(aux1.ToString());
 		
 		//Representa el hueso de la articulacion a medir
 		Vector3 bone = new Vector3(distance(joint1.x, joint.x), distance(joint1.y, joint.y), distance(joint1.z, joint.z));
+		//Debug.Log ("BONE: " + bone);
+		//Debug.Log ("INITBONE: " + initBone);
 //		bone.SetName(joint.GetName());
 		
 		//calcula las restricciones
 		//restricciones();
-		
+		restricciones();
 		float ang = AngleProjection(bone, plane, initBone);
+		//Debug.Log ("Angulo actual: " + ang);
 //		texto.text = (Math.Truncate(ang)).ToString();
 //		if (Interfaz == true) {
 //			textoMin.text = "Minimo: ";
@@ -309,7 +341,7 @@ public class GameManager : MonoBehaviour {
 //		}
 //		
 //		if (barra) {	
-//			Barra.guiTexture.pixelInset = new Rect(-64,-29,(((float)ang * 400)/ maximo-minimo), 18);
+//			//Barra.guiTexture.pixelInset = new Rect(-64,-29,(((float)ang * 400)/ maximo-minimo), 18);
 //			if ((((float)ang * 400)/ maximo-minimo) < (60 * 400 /100))
 //				Barra.guiTexture.texture = bajo;
 //			else if (((((float)ang * 400)/ maximo-minimo) > (60 * 400/100)) && (((float)ang * 400)/ maximo-minimo < (80 * 400 /100))) 

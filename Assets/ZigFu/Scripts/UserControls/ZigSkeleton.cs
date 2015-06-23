@@ -47,9 +47,7 @@ public class ZigSkeleton : MonoBehaviour
     private Transform[] transforms;
     private Quaternion[] initialRotations;
     private Vector3 rootPosition;
-
-	UserTest ut;
-
+	
     ZigJointId mirrorJoint(ZigJointId joint)
     {
         switch (joint)
@@ -118,13 +116,13 @@ public class ZigSkeleton : MonoBehaviour
         transforms[(int)ZigJointId.LeftShoulder] = LeftShoulder;
         transforms[(int)ZigJointId.LeftElbow] = LeftElbow;
         transforms[(int)ZigJointId.LeftWrist] = LeftWrist;
-        transforms[(int)ZigJointId.LeftHand] = LeftHand;
+       // transforms[(int)ZigJointId.LeftHand] = LeftHand;
   //      transforms[(int)ZigJointId.LeftFingertip] = LeftFingertip;
         //transforms[(int)ZigJointId.RightCollar] = RightCollar;
         transforms[(int)ZigJointId.RightShoulder] = RightShoulder;
         transforms[(int)ZigJointId.RightElbow] = RightElbow;
         transforms[(int)ZigJointId.RightWrist] = RightWrist;
-        transforms[(int)ZigJointId.RightHand] = RightHand;
+      //  transforms[(int)ZigJointId.RightHand] = RightHand;
      //   transforms[(int)ZigJointId.RightFingertip] = RightFingertip;
         transforms[(int)ZigJointId.LeftHip] = LeftHip;
         transforms[(int)ZigJointId.LeftKnee] = LeftKnee;
@@ -153,8 +151,6 @@ public class ZigSkeleton : MonoBehaviour
 
     void Start()
     {
-		ut = gameObject.GetComponent<UserTest>();
-
         // start out in calibration pose
         if (RotateToPsiPose)
         {
@@ -268,7 +264,7 @@ public class ZigSkeleton : MonoBehaviour
             }
 			if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame) {		
 				//ut.Cargar(); //lee el fichero de definiciones
-				ut.Medir();
+				GameManager.instance.Medir();
 			}
         }
     }

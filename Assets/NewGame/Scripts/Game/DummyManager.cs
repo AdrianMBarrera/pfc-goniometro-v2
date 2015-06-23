@@ -152,19 +152,16 @@ public class DummyManager : MonoBehaviour {
 			_poseList.Clear();
 		}
 		translateArt(artIni).eulerAngles = repPos;
-		
-		
+
 		deleteSphere("IniSphere");
 		//	deleteSphere ("EndSphere");
 		if ( OnEndExercise != null){
-			
 			OnEndExercise();
 		}
 
 		if (GameManager.instance.stateOfGame != GameManager.statesOfGame.None) {
 			GameManager.instance.Calibrate();
 		}
-	
 	}
 
 
@@ -207,12 +204,12 @@ public class DummyManager : MonoBehaviour {
 	public void LoadXml(string name){
 		
 		deleteSphere("IniSphere");
-		//	deleteSphere ("EndSphere");
+		//deleteSphere ("EndSphere");
 		
 		XmlDocument xDoc = new XmlDocument();
-		Debug.Log (Application.dataPath);
+		//Debug.Log (Application.dataPath);
 		xDoc.Load("./Exercises/" + name);
-		Debug.Log(name);
+		//Debug.Log(name);
 		
 		XmlNodeList exer = xDoc.GetElementsByTagName("EXERCISE");	  
 		artIni = Convert.ToInt16(exer[0].Attributes["initialId"].InnerText);
@@ -266,10 +263,9 @@ public class DummyManager : MonoBehaviour {
 				pose.SetArt1(Convert.ToInt16(ID1[i].InnerText));
 				
 				//define la posicion correcta para el ejercicio
-				Vector aux = new Vector();
-				aux.SetX(Convert.ToInt16(FX[i].InnerText));
-				aux.SetY(Convert.ToInt16(FY[i].InnerText));
-				aux.SetZ(Convert.ToInt16(FZ[i].InnerText));
+				Vector3 aux = new Vector3(Convert.ToInt16(FX[i].InnerText), 
+				                          Convert.ToInt16(FY[i].InnerText), 
+				                          Convert.ToInt16(FZ[i].InnerText));
 				pose.SetBone(aux);
 				
 				pose.RotIni = new Vector3(Convert.ToInt16(RX[i].InnerText),
@@ -307,7 +303,16 @@ public class DummyManager : MonoBehaviour {
 			                         Convert.ToInt16(pos0[0].Attributes["y"].InnerText),
 			                         Convert.ToInt16(pos0[0].Attributes["z"].InnerText));
 
-			GameManager.instance.poseList = _poseList;
+			GameManager.instance.poseList = new List<Pose>(_poseList);
+
+			GameManager.instance.rsArray = new GameObject[_poseList.Count];
+			int i = 0;
+			foreach (Pose p in _poseList) {
+				GameManager.instance.rsArray[i] = Instantiate(GameManager.instance.restrictSphere, 
+				                                              translateArt(p.GetArt()).position,
+				                                              Quaternion.identity) as GameObject;
+				i++;
+			}
 		}
 
 
