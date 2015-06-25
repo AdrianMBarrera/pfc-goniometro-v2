@@ -12,8 +12,8 @@ public class DummyManager : MonoBehaviour {
 	//public GameObject EndSphere;
 	public GameObject ReferenceSphere;
 	public GameObject RestrictSphere;
-
-	private int artIni, artEnd, refId, inicio, eje = 0;
+	
+	private int artIni, artEnd = 0;
 	private float _minimo, _maximo;
 	private Vector3 _plane; // plano de medicion->definido en el fichero de definiciones
 	private Vector3 _initBone; //posicion inicial del brazo, con respecto a esta posicion se medira
@@ -46,6 +46,7 @@ public class DummyManager : MonoBehaviour {
 		//GameManager.OnLoadGamePhase += ReadyAnimation;
 		GameManager.OnInGamePhase += SetOff;
 		GameManager.OnCalibrationPhase += SetOn;
+		GameManager.OnDemostrationPhase += SetOn;
 	}
 
 
@@ -53,6 +54,7 @@ public class DummyManager : MonoBehaviour {
 		//GameManager.OnLoadGamePhase += ReadyAnimation;
 		GameManager.OnInGamePhase -= SetOff;
 		GameManager.OnCalibrationPhase -= SetOn;
+		GameManager.OnDemostrationPhase -= SetOn;
 	}
 
 
@@ -311,6 +313,10 @@ public class DummyManager : MonoBehaviour {
 				GameManager.instance.rsArray[i] = Instantiate(GameManager.instance.restrictSphere, 
 				                                              translateArt(p.GetArt()).position,
 				                                              Quaternion.identity) as GameObject;
+
+				//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.Find("Player/" + translateArt(p.GetArt()).name).transform;
+				GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = translateArt(p.GetArt());
+
 				i++;
 			}
 		}

@@ -33,15 +33,24 @@ public class ManagerPreGameUI : MonoBehaviour {
 
 	private Button _playButton;
 
+	private bool playButtonControl = false; //Controla si el boton Play es interactuable o no
+
+
+
+
+
 	void OnEnable(){
 		GameManager.OnLoadGamePhase += LoadGame;
+		DummyManager.OnBeginExercise += SetStateButton;
+		DummyManager.OnEndExercise += SetStateButton;
 		
 	}
 	
 	void OnDisable(){
 
 		GameManager.OnLoadGamePhase -= LoadGame;
-
+		DummyManager.OnBeginExercise -= SetStateButton;
+		DummyManager.OnEndExercise -= SetStateButton;
 	}
 
 	// Use this for initialization
@@ -89,9 +98,8 @@ public class ManagerPreGameUI : MonoBehaviour {
 
 			_infoInstancePanel.GetComponent<Canvas>().enabled =false;
 
-
-			CheckPlay();
-
+			if (!playButtonControl)
+				CheckPlay();
 
 		}
 		
@@ -178,7 +186,7 @@ public class ManagerPreGameUI : MonoBehaviour {
 
 	//comprobamos si se puede pulsar el boton play
 
-	void CheckPlay(){
+	public void CheckPlay(){
 
 		if (InfoPlayer.alExercise.Count != 0){
 			_playButton.interactable = true;
@@ -189,6 +197,14 @@ public class ManagerPreGameUI : MonoBehaviour {
 		}
 
 	}
+
+
+	void SetStateButton(){
+		playButtonControl = !playButtonControl;
+		_playButton.interactable = false;
+	}
+
+
 
 
 }

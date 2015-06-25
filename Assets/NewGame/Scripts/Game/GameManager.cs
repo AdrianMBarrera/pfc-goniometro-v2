@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour {
 	public Vector3 plane, initBone;
 	public List<Pose> poseList;  //Lista de restricciones a tener en cuenta durante el ejercicio
 
+	public float angle = 0;
+
 	public delegate void LoadGamePhase();
 	public static event LoadGamePhase OnLoadGamePhase;
 
@@ -57,20 +59,11 @@ public class GameManager : MonoBehaviour {
 	public delegate void EndPhase();
 	public static event EndPhase OnEndPhase;
 
-
-
-
-
-
-
-	
 	void Awake(){
 
 		instance = this;
 
 	}
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -141,15 +134,9 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-
-
 	}
-
-
-
-
-
 	
+
 	IEnumerator WaitForBegin(){
 		
 		yield return new WaitForSeconds (2f);
@@ -326,7 +313,7 @@ public class GameManager : MonoBehaviour {
 		//calcula las restricciones
 		//restricciones();
 		restricciones();
-		float ang = AngleProjection(bone, plane, initBone);
+		angle = AngleProjection(bone, plane, initBone);
 		//Debug.Log ("Angulo actual: " + ang);
 //		texto.text = (Math.Truncate(ang)).ToString();
 //		if (Interfaz == true) {

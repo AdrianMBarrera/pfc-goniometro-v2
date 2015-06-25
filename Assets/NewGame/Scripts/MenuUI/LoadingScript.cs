@@ -46,7 +46,11 @@ public class LoadingScript : MonoBehaviour {
 
 
 
+	public void Exit(){
 
+		Application.Quit();
+
+	}
 
 
 }

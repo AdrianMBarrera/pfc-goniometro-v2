@@ -5,7 +5,14 @@ using UnityEngine.UI;
 public class ProgressBarScript : MonoBehaviour {
 
 	private Text _text;
-	
+
+	private ProgressBar.ProgressBarBehaviour pb;
+
+	public Gradient grad;
+
+	public Image filler;
+
+
 	private Image[] _imgArray;
 	
 
@@ -29,7 +36,7 @@ public class ProgressBarScript : MonoBehaviour {
 	void Start () {
 		
 		//_anim = GetComponent<Animator>();
-		
+		pb = GetComponent<ProgressBar.ProgressBarBehaviour>();
 		_imgArray = GetComponentsInChildren<Image>();
 		
 		foreach (Image img in _imgArray){
@@ -46,7 +53,10 @@ public class ProgressBarScript : MonoBehaviour {
 		
 		
 		if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame){
+			
+			pb.SetFillerSizeAsPercentage(AngToPercent());
 
+			filler.color = grad.Evaluate(AngToPercent()/100);
 			
 			//aumentar o disminuir la barra cambiar el valor del numero
 			
@@ -78,7 +88,20 @@ public class ProgressBarScript : MonoBehaviour {
 		_text.enabled =true;
 	}
 	
-	
+
+	float AngToPercent(){
+
+		float percent = 0f;
+
+		percent = (GameManager.instance.angle * -100) / GameManager.instance.maximo;
+
+		if (percent < 0)
+			percent = 0;
+		else if (percent > 100)
+			percent = 100;
+
+		return percent;
+	}
 
 
 }

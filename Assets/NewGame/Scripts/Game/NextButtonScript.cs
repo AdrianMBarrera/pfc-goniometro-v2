@@ -66,7 +66,19 @@ public class NextButtonScript : MonoBehaviour {
 		}
 		else {
 			_text.text = "End";
+
+			InfoPlayer.alExercise.Clear();
+			GetComponent<Button>().onClick.RemoveAllListeners();
+			GetComponent<Button>().onClick.AddListener(() => {DestroyZig();});
+			GetComponent<Button>().onClick.AddListener(() => {GameObject.Find("Veil").GetComponent<LoadingScript>().BeginLevel("GameMenu");});
 		}
+
+	}
+
+
+
+	void DestroyZig(){
+		Destroy(GameObject.Find("ZigInputContainer"));
 
 	}
 
