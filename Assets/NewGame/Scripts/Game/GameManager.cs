@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+
+	// VARIABLES
+
 	public static GameManager instance;
 
 	public GameObject restrictSphere;
 	public GameObject[] rsArray;
-
-	ZigEngageSingleUser zesu;
 	public GameObject zigfu;
 
 	public enum statesOfGame : int {None = -1,Calibration = 0 , LoadGame = 1, Demostration = 2,  InGame = 3 , End = 4 }
@@ -35,14 +36,26 @@ public class GameManager : MonoBehaviour {
 
 	public InfoPlayer.gameModes gameMode = InfoPlayer.gameModes.None;
 
-	//Variables para la medicion del ejercicio
-	ZigSkeleton zs;
+	public  GameObject player;
+
+
+
+	// ----- Variables para la medicion del ejercicio
 	public int artIni, artEnd = 0;
 	public float minimo, maximo;
 	public Vector3 plane, initBone;
 	public List<Pose> poseList;  //Lista de restricciones a tener en cuenta durante el ejercicio
 
 	public float angle = 0;
+	public float maxAngle = 0;
+
+	private bool isRep = true;
+
+	public bool waitForPlayer = false;
+
+
+	//----EVENTOS
+
 
 	public delegate void LoadGamePhase();
 	public static event LoadGamePhase OnLoadGamePhase;
@@ -59,6 +72,26 @@ public class GameManager : MonoBehaviour {
 	public delegate void EndPhase();
 	public static event EndPhase OnEndPhase;
 
+
+	public delegate void CheckFeedBack();
+	public static event CheckFeedBack OnCheckFeedBack;
+
+
+
+
+	void OnEnable(){
+		DummyManager.OnEndExercise += ActivateZigfu;
+
+	}
+
+	void OnDisable(){
+
+		DummyManager.OnEndExercise -= ActivateZigfu;
+
+	}
+
+
+	
 	void Awake(){
 
 		instance = this;
@@ -84,18 +117,12 @@ public class GameManager : MonoBehaviour {
 
 		case (InfoPlayer.gameModes.Preset) : break;
 
-
-
 		}
-
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-
-
 
 	}
 
@@ -109,9 +136,7 @@ public class GameManager : MonoBehaviour {
 		if (OnInGamePhase != null){
 
 			OnInGamePhase();
-
 		}
-
 	}
 
 	//se llama para lanzar al dummy para mostrar el ejercicio que tieens que realizar
@@ -121,8 +146,9 @@ public class GameManager : MonoBehaviour {
 
 		currentExercise++;
 		if (GameManager.instance.currentExercise < InfoPlayer.alExercise.Count) {
-			stateOfGame = statesOfGame.LoadGame;
+			stateOfGame = statesOfGame.Demostration;
 			DummyManager.instance.LoadXml(InfoPlayer.alExercise[currentExercise].FileName);
+
 			if (OnDemostrationPhase != null) {
 				OnDemostrationPhase();
 			}
@@ -133,16 +159,16 @@ public class GameManager : MonoBehaviour {
 				OnEndPhase();
 			}
 		}
-
 	}
 	
 
 	IEnumerator WaitForBegin(){
 		
 		yield return new WaitForSeconds (2f);
-		zigfu.SetActive(true);
+		//zigfu.SetActive(true);
 		NextExercise();
 	}
+
 
 	// se llama la primera vez que empieza el juego
 
@@ -155,6 +181,9 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(WaitForBegin());
 	}
 
+
+
+
 	public void Calibrate() {
 
 		stateOfGame = 0;
@@ -163,6 +192,73 @@ public class GameManager : MonoBehaviour {
 		}
 		
 	}
+
+
+	IEnumerator waitForPlayerCoroutine() {
+		yield return new WaitForSeconds(2f);
+		waitForPlayer = true;
+	}
+
+
+	void ActivateZigfu(){
+		if (stateOfGame != statesOfGame.None){
+
+			GameObject zigInput = GameObject.Find("ZigInputContainer");
+			if (zigInput){
+				Destroy (GameObject.Find("Zigfu"));
+				//Destroy (GameObject.Find("ZigInputContainer"));
+	
+			}
+			zigfu = Instantiate(zigfu) as GameObject;
+			zigfu.name = "Zigfu";
+			ZigEngageSingleUser zesu = zigfu.GetComponent<ZigEngageSingleUser>();
+			ZigDepthViewer zdv =  zigfu.GetComponent<ZigDepthViewer>();
+			ZigUsersRadar zur =  zigfu.GetComponent<ZigUsersRadar>();
+			zesu.EngagedUsers[0] = player;
+			zesu.enabled = true;
+			zdv.enabled = true;
+			zur.enabled = true;
+
+			waitForPlayer = false;
+			StartCoroutine(waitForPlayerCoroutine());
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//--------------------------------------------------------------------------
+
+
+
+
 
 
 
@@ -285,35 +381,51 @@ public class GameManager : MonoBehaviour {
 			
 			//texto.text = bone1.GetX().ToString()+" "+bone1.GetY().ToString()+" "+bone1.GetZ().ToString();
 			if (CalcAngle(bone1, pose.GetBone()) < pose.GetGrado()) {
-				rsArray[i].renderer.material.color = new Color(0, 255f, 0, 160f);
+				rsArray[i].renderer.material.color = new Color(0, 255f, 0, 100f);
 			}
 			else {
-				rsArray[i].renderer.material.color = new Color(255f, 0, 0, 160f);
+				rsArray[i].renderer.material.color = new Color(255f, 0, 0, 100f);
 			}
 			i++;
 		}
 	}
 
-	public void Medir() {       
+	public void Medir() {   
+
+		//float temp = angle; //variable para ver si la medicion aumenta o no
+		if (maxAngle < MathUtils.AngToPercent(angle))
+			maxAngle = MathUtils.AngToPercent(angle);
+
 		Transform aux = art(artIni);
 		Transform aux1 = art(artEnd);
 		
 		Vector3 joint = new Vector3 (aux.position.x, aux.position.y, aux.position.z);
-//		joint.SetName(aux.ToString());
-		
 		Vector3 joint1 = new Vector3 (aux1.position.x, aux1.position.y, aux1.position.z);
-//		joint1.SetName(aux1.ToString());
-		
+
 		//Representa el hueso de la articulacion a medir
 		Vector3 bone = new Vector3(distance(joint1.x, joint.x), distance(joint1.y, joint.y), distance(joint1.z, joint.z));
-		//Debug.Log ("BONE: " + bone);
-		//Debug.Log ("INITBONE: " + initBone);
-//		bone.SetName(joint.GetName());
 		
 		//calcula las restricciones
-		//restricciones();
 		restricciones();
 		angle = AngleProjection(bone, plane, initBone);
+		//Debug.Log ("Angle: " + angle);
+		//Debug.Log ("MaxAngle: " + maxAngle);
+
+		if (isRep) {
+			if (maxAngle-15 > MathUtils.AngToPercent(angle)){
+				Debug.Log ("Sueno guay");
+				if (OnCheckFeedBack != null){
+					OnCheckFeedBack();
+				}
+				isRep = false;
+			}
+		}
+		if (MathUtils.AngToPercent(angle) < 10) {
+			maxAngle = MathUtils.AngToPercent(angle);
+			isRep = true;
+		}
+
+
 		//Debug.Log ("Angulo actual: " + ang);
 //		texto.text = (Math.Truncate(ang)).ToString();
 //		if (Interfaz == true) {
@@ -326,16 +438,7 @@ public class GameManager : MonoBehaviour {
 //			textoDificultad.text = "Dificultad(%): ";
 //			texto4.text = dificultad.ToString();
 //		}
-//		
-//		if (barra) {	
-//			//Barra.guiTexture.pixelInset = new Rect(-64,-29,(((float)ang * 400)/ maximo-minimo), 18);
-//			if ((((float)ang * 400)/ maximo-minimo) < (60 * 400 /100))
-//				Barra.guiTexture.texture = bajo;
-//			else if (((((float)ang * 400)/ maximo-minimo) > (60 * 400/100)) && (((float)ang * 400)/ maximo-minimo < (80 * 400 /100))) 
-//				Barra.guiTexture.texture = medio;
-//			else
-//				Barra.guiTexture.texture = alto;
-//		}
+
 		
 		//tick es el tiempo de juego transcurrido y cada vez que pase el limite escribe resutaldos y se resetea
 //		if (medicion.GetTick() >= medicion.GetLimit()) {	
@@ -360,4 +463,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 
-}
+
+
+
+
+
+}//end class

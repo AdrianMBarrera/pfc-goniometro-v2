@@ -74,7 +74,7 @@ public class ProgressBarScript : MonoBehaviour {
 		}
 		_text.enabled = false;
 		
-		InfoPlayer.gameModes mode = (InfoPlayer.gameModes) GameManager.instance.gameMode;
+	//	InfoPlayer.gameModes mode = (InfoPlayer.gameModes) GameManager.instance.gameMode;
 		
 
 	}

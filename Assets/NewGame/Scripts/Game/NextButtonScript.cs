@@ -70,7 +70,7 @@ public class NextButtonScript : MonoBehaviour {
 			InfoPlayer.alExercise.Clear();
 			GetComponent<Button>().onClick.RemoveAllListeners();
 			GetComponent<Button>().onClick.AddListener(() => {DestroyZig();});
-			GetComponent<Button>().onClick.AddListener(() => {GameObject.Find("Veil").GetComponent<LoadingScript>().BeginLevel("GameMenu");});
+			GetComponent<Button>().onClick.AddListener(() => {GameObject.Find("Veil").GetComponent<LoadingScript>().BeginLevel("GameStats");});
 		}
 
 	}

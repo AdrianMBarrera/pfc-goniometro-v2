@@ -8,6 +8,20 @@ TagManager:
   - Order
   - 
   - Toogle
+  - Head
+  - Spine
+  - JointLeftArm
+  - JointLeftForeArm
+  - JointLeftHand
+  - JointRightArm
+  - JointRightForeArm
+  - JointRightHand
+  - LeftUpLeg
+  - JointLeftLeg
+  - LeftFoot
+  - RightUpLeg
+  - JointRightLeg
+  - RightFoot
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

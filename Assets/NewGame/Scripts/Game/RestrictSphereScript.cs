@@ -38,7 +38,7 @@ public class RestrictSphereScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("nombre" + artRest.position);
+//		Debug.Log("nombre" + artRest.position);
 		transform.position = new Vector3(artRest.position.x, artRest.position.y, artRest.position.z);
 	}
 }

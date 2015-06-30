@@ -70,12 +70,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133060}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6e0fbe56a984814bb55e043166b1beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RadarRealWorldDimensions: {x: 4000, y: 4000}
+  RadarRealWorldDimensions: {x: 1, y: 1}
   PixelsPerMeter: 35
   boxColor: {r: .521626294, g: .601569057, b: .985294104, a: 1}
 --- !u!114 &11433066

@@ -4,21 +4,30 @@ using UnityEngine.UI;
 
 public class ReadyTextScript : MonoBehaviour {
 
-	private Animator readyAnim;
+	private Animator _readyAnim;
+	private Text _t;
 
 	void OnEnable(){
 		//GameManager.OnLoadGamePhase += ReadyAnimation;
 		GameManager.OnInGamePhase += ReadyAnimation;
-		
+		GameManager.OnDemostrationPhase += SetOff;
+		GameManager.OnCalibrationPhase += SetOff;
 	}
 
+
+	void OnDisable(){
+		//GameManager.OnLoadGamePhase += ReadyAnimation;
+		GameManager.OnInGamePhase -= ReadyAnimation;
+		GameManager.OnDemostrationPhase -= SetOff;
+		GameManager.OnCalibrationPhase -= SetOff;
+	}
 
 
 	// Use this for initialization
 	void Start () {
-		readyAnim = GetComponent<Animator>();
+		_readyAnim = GetComponent<Animator>();
 		
-
+		_t = GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -28,10 +37,18 @@ public class ReadyTextScript : MonoBehaviour {
 
 
 	void ReadyAnimation(){
-	
-		readyAnim.Play("Idle");
-		readyAnim.SetBool("isBig", true);
+		_t.enabled = true;
+		_readyAnim.Play("Idle");
+		_readyAnim.SetBool("isBig", true);
 	}
+
+
+
+	void SetOff(){
+
+		_t.enabled = false;
+	}
+
 
 
 

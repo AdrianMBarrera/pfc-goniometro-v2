@@ -157,6 +157,7 @@ public class DummyManager : MonoBehaviour {
 
 		deleteSphere("IniSphere");
 		//	deleteSphere ("EndSphere");
+
 		if ( OnEndExercise != null){
 			OnEndExercise();
 		}
@@ -315,8 +316,8 @@ public class DummyManager : MonoBehaviour {
 				                                              Quaternion.identity) as GameObject;
 
 				//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.Find("Player/" + translateArt(p.GetArt()).name).transform;
-				GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = translateArt(p.GetArt());
-
+				//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = translateArt(p.GetArt());
+				GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.FindWithTag(translateArt(p.GetArt()).name).transform;
 				i++;
 			}
 		}
