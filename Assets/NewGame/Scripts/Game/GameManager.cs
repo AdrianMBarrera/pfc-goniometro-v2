@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 	public enum statesOfGame : int {None = -1,Calibration = 0 , LoadGame = 1, Demostration = 2,  InGame = 3 , End = 4 }
 
 	[Tooltip("Temporizador del tiempo de juego")]
-	public float timer;
+	public float timer = 0;
 	
 	[Tooltip("estado en el que se encuentra el juego 0.- Calibrado, 1.- Cargando, 2.- Demostracion del ejercicio," +
 		"3.- En Ejecucion, 4.-Final")]
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
 	         "12. RightUpLeg\n13. JointRightLeg\n14. RightFoot")]
 	public GameObject[] articulations;
 
-	public InfoPlayer.gameModes gameMode = InfoPlayer.gameModes.None;
+	//public InfoPlayer.gameModes gameMode = InfoPlayer.gameModes.None;
 
 	public  GameObject player;
 
@@ -103,11 +103,11 @@ public class GameManager : MonoBehaviour {
 
 		poseList = new List<Pose>();
 
-		InfoPlayer.gameModes mode = (InfoPlayer.gameModes) gameMode;
+		//InfoPlayer.gameModes mode = InfoPlayer.gameMode;
 
-		mode = (InfoPlayer.gameModes.Open) ;  //ACORDARSE DE QUITAR ESTO
+		InfoPlayer.gameMode = InfoPlayer.gameModes.Open ;  //ACORDARSE DE QUITAR ESTO
 
-		switch(mode){
+		switch(InfoPlayer.gameMode){
 
 		case(InfoPlayer.gameModes.Open): break;
 
@@ -238,7 +238,35 @@ public class GameManager : MonoBehaviour {
 
 
 
+	void SaveStats (){
 
+		Debug.Log ("CURRENT EXERCISE: " + currentExercise);
+
+		if (maxAngle > InfoPlayer.alExercise[currentExercise].Max){
+
+			InfoPlayer.alExercise[currentExercise].Max = maxAngle;
+		}
+
+		if (maxAngle < InfoPlayer.alExercise[currentExercise].Min){
+
+			InfoPlayer.alExercise[currentExercise].Min = maxAngle;
+		}
+
+
+		if  (GameManager.instance.maxAngle >= 65){
+
+			InfoPlayer.alExercise[currentExercise].Success +=1;
+			
+		}else{
+			InfoPlayer.alExercise[currentExercise].Fail +=1;
+			
+		}
+		timer += TotalTime;
+		InfoPlayer.alExercise[currentExercise].Duration = timer;
+
+
+
+	}
 
 
 
@@ -408,15 +436,14 @@ public class GameManager : MonoBehaviour {
 		//calcula las restricciones
 		restricciones();
 		angle = AngleProjection(bone, plane, initBone);
-		//Debug.Log ("Angle: " + angle);
-		//Debug.Log ("MaxAngle: " + maxAngle);
 
 		if (isRep) {
 			if (maxAngle-15 > MathUtils.AngToPercent(angle)){
-				Debug.Log ("Sueno guay");
+
 				if (OnCheckFeedBack != null){
 					OnCheckFeedBack();
 				}
+				SaveStats();
 				isRep = false;
 			}
 		}

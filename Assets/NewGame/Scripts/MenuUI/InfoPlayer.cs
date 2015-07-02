@@ -6,6 +6,7 @@ public class InfoPlayer : MonoBehaviour {
 
 	public enum gameModes: int {None = -1, Open = 1, Custom = 2, Preset = 3}
 	
+	public static gameModes gameMode = gameModes.None;
 
 	public static List<ExerciseValue> alExercise = new List <ExerciseValue>();
 

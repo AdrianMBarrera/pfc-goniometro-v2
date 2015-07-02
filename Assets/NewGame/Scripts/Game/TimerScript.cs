@@ -74,7 +74,7 @@ public class TimerScript : MonoBehaviour {
 		}
 		_text.enabled = false;
 
-		InfoPlayer.gameModes mode = (InfoPlayer.gameModes) GameManager.instance.gameMode;
+		InfoPlayer.gameModes mode = InfoPlayer.gameMode;
 		
 		mode = (InfoPlayer.gameModes) 1;  //ACORDARSE DE QUITAR ESTO
 		
@@ -108,7 +108,7 @@ public class TimerScript : MonoBehaviour {
 
 	void CountTime(){
 
-		InfoPlayer.gameModes mode = (InfoPlayer.gameModes) GameManager.instance.gameMode;
+		InfoPlayer.gameModes mode = InfoPlayer.gameMode;
 		
 		mode = (InfoPlayer.gameModes) 1;  //ACORDARSE DE QUITAR ESTO
 		

@@ -9,6 +9,11 @@ namespace ProgressBar
     /// </summary>
     public class ProgressBarBehaviour : MonoBehaviour, IIncrementable, IDecrementable
     {
+
+		/* Modificado */
+		public Gradient grad;
+		/* ---------- */
+
         /// <summary>
         /// Rect from the panel that will act as Filler.
         /// </summary>
@@ -88,6 +93,7 @@ namespace ProgressBar
 
         void Start()
         {
+			grad.Evaluate(0);
             //Max and Min Filler Values
             m_FillerInfo = new FillerProperty(0, m_FillRect.rect.width);
             //Current and Max Filler Values
@@ -106,22 +112,25 @@ namespace ProgressBar
             {
                 //The difference between the two values.
                 float Dvalue = m_Value.AsFloat - TransitoryValue;
-
                 //If the difference is positive:
                 //  TransitoryValue needs to be incremented.
                 if (Dvalue > 0)
                 {
                     TransitoryValue += ProgressSpeed * Time.deltaTime;
-                    if (TransitoryValue > m_Value.AsFloat)
+                    if (TransitoryValue > m_Value.AsFloat) {
+						//m_FillRect.GetComponent<Image>().color = grad.Evaluate(m_Value.AsFloat/100);
                         TransitoryValue = m_Value.AsFloat;
+					}
                 }
                 //If the difference is negative:
                 //  TransitoryValue needs to be decremented.
                 else if (Dvalue < 0)
                 {
                     TransitoryValue -= ProgressSpeed * Time.deltaTime;
-                    if (TransitoryValue < m_Value.AsFloat)
+                    if (TransitoryValue < m_Value.AsFloat) {
                         TransitoryValue = m_Value.AsFloat;
+						//m_FillRect.GetComponent<Image>().color = grad.Evaluate(m_Value.AsFloat/100);
+					}
                 }
 
                 //Clamping:
@@ -152,7 +161,7 @@ namespace ProgressBar
         {
             if (m_AttachedText)
                 m_AttachedText.text = Mathf.Round(Width / m_FillerInfo.MaxWidth * 100).ToString() + " %";
-
+			m_FillRect.GetComponent<Image>().color = grad.Evaluate((Width / m_FillerInfo.MaxWidth * 100)/100);
             m_FillRect.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, XOffset, Width);
         }
 
@@ -163,6 +172,7 @@ namespace ProgressBar
         public void SetFillerSizeAsPercentage(float Percent)
         {
             m_Value.Set(m_FillerInfo.MaxWidth * Percent / 100);
+			//m_FillRect.GetComponent<Image>().color = grad.Evaluate(m_Value.AsFloat/100);
             
             if (Value < 0) Value = 0;
             else if (Value > 100) Value = 100;
@@ -183,7 +193,7 @@ namespace ProgressBar
         public void IncrementValue(float inc)
         {
             Value += inc;
-
+			//m_FillRect.GetComponent<Image>().color += grad.Evaluate(inc/100);
             if (Value > 100) Value = 100;
         }
 
@@ -194,7 +204,7 @@ namespace ProgressBar
         public void DecrementValue(float dec)
         {
             Value -= dec;
-
+			//m_FillRect.GetComponent<Image>().color -= grad.Evaluate(dec/100);
             if (Value < 0) Value = 0;
         }
     }

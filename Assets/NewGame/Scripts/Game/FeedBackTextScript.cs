@@ -63,6 +63,17 @@ public class FeedBackTextScript : MonoBehaviour {
 		Debug.Log("rand" + rand);
 		if (GameManager.instance.maxAngle >= 90){
 
+			int randText = Random.Range(0, 2);
+
+			if (randText >0 ){
+
+				excellent = "PERFECT!";
+			}else{
+				excellent = "EXCELLENT!";
+
+			}
+
+
 			AssignValues(excellent, 
 			             v2min[rand],
 			             v2max[rand]);

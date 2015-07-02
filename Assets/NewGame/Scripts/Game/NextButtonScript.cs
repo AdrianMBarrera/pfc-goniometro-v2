@@ -60,6 +60,7 @@ public class NextButtonScript : MonoBehaviour {
 
 		_img.enabled = true;
 		_text.enabled =true;
+		GameManager.instance.timer = 0;
 
 		if (GameManager.instance.currentExercise+1 < InfoPlayer.alExercise.Count) {
 			_text.text = "Next >";
@@ -67,7 +68,7 @@ public class NextButtonScript : MonoBehaviour {
 		else {
 			_text.text = "End";
 
-			InfoPlayer.alExercise.Clear();
+			//InfoPlayer.alExercise.Clear();
 			GetComponent<Button>().onClick.RemoveAllListeners();
 			GetComponent<Button>().onClick.AddListener(() => {DestroyZig();});
 			GetComponent<Button>().onClick.AddListener(() => {GameObject.Find("Veil").GetComponent<LoadingScript>().BeginLevel("GameStats");});
@@ -79,7 +80,7 @@ public class NextButtonScript : MonoBehaviour {
 
 	void DestroyZig(){
 		Destroy(GameObject.Find("ZigInputContainer"));
-
+		Destroy(GameObject.Find ("Zigfu"));
 	}
 
 

@@ -53,14 +53,9 @@ public class ProgressBarScript : MonoBehaviour {
 		
 		
 		if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame){
-			
 			pb.SetFillerSizeAsPercentage(AngToPercent());
-
-			filler.color = grad.Evaluate(AngToPercent()/100);
-			
+			//filler.color = grad.Evaluate(AngToPercent()/100);
 			//aumentar o disminuir la barra cambiar el valor del numero
-			
-			
 		}
 	}
 	
