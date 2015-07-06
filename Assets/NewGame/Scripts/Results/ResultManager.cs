@@ -20,19 +20,22 @@ public class ResultManager : MonoBehaviour {
 
 	public Text FeedbackText;
 
-	public Sprite successImage;
+	public Animator _anim;
 
-	public Sprite FailImage;
-
-	private bool locker = false;
+	public Button lessResults;
+	public Button moreResults;
 
 	private float percent = 100f;
+
+	public Text moreInfoText;
 
 
 	
 	void Start () {
 		pb = GameObject.Find("ProgressBarLabelFollow").GetComponent<ProgressBar.ProgressBarBehaviour>();
 		StartCoroutine(ShowResults());
+		lessResults.GetComponent<Image>().enabled = false;
+
 	}
 
 
@@ -60,12 +63,24 @@ public class ResultManager : MonoBehaviour {
 		int success = 0, fails = 0, reps = 0;
 		float time = 0f;
 
+
+
 		for (int i = 0; i < InfoPlayer.alExercise.Count; i++) {
+			moreInfoText.GetComponent<RectTransform>().sizeDelta = new Vector2 (moreInfoText.GetComponent<RectTransform>().sizeDelta.x,
+			                                                                    moreInfoText.GetComponent<RectTransform>().sizeDelta.y+190f);
 			success += InfoPlayer.alExercise[i].Success;
 			fails += InfoPlayer.alExercise[i].Fail;
 			reps += InfoPlayer.alExercise[i].Success + InfoPlayer.alExercise[i].Fail;
 			time += InfoPlayer.alExercise[i].Duration;
+			int m = (int)(InfoPlayer.alExercise[i].Duration/60f);
+			int s = (int)(InfoPlayer.alExercise[i].Duration%60f);
+			moreInfoText.text += "\n\n\n<size=25>Exercise: " + InfoPlayer.alExercise[i].FileName + "</size>" +
+				"\n\n\tTime: " + string.Format("{0:00}:{1:00}", m ,s) +
+				"\n\n\tRepetitions: " + (InfoPlayer.alExercise[i].Success + InfoPlayer.alExercise[i].Fail).ToString() +
+				"\n\n\tSuccess: " + InfoPlayer.alExercise[i].Success.ToString() +
+				"\n\n\tFails: " + InfoPlayer.alExercise[i].Fail.ToString();
 		}
+
 
 		int minutes = (int)(time/60f);
 		int seconds = (int)(time%60f);
@@ -108,19 +123,6 @@ public class ResultManager : MonoBehaviour {
 
 		yield return new WaitForSeconds(2f);
 
-
-
-	}
-
-
-
-
-	IEnumerator NextResult(){
-
-		locker = false;
-		yield return new WaitForSeconds(2f);
-		locker = true;
-
 	}
 
 
@@ -128,6 +130,17 @@ public class ResultManager : MonoBehaviour {
 		InfoPlayer.alExercise.Clear();
 	}
 
+	public void ShowMoreResults () {
+		_anim.SetBool("isHidden", true);
+		moreResults.GetComponent<Image>().enabled = false;
+		lessResults.GetComponent<Image>().enabled = true;
+	}
+
+	public void ShowLessResults () {
+		_anim.SetBool("isHidden", false);
+		moreResults.GetComponent<Image>().enabled = true;
+		lessResults.GetComponent<Image>().enabled = false;
+	}
 
 
 }

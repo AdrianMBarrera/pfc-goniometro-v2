@@ -215,8 +215,8 @@ public class DummyManager : MonoBehaviour {
 		//Debug.Log(name);
 		
 		XmlNodeList exer = xDoc.GetElementsByTagName("EXERCISE");	  
-		artIni = float.ToInt16(exer[0].Attributes["initialId"].InnerText);
-		artEnd = float.ToInt16(exer[0].Attributes["finalId"].InnerText);
+		artIni = Convert.ToInt16(exer[0].Attributes["initialId"].InnerText);
+		artEnd = Convert.ToInt16(exer[0].Attributes["finalId"].InnerText);
 		
 		XmlNodeList angles = xDoc.GetElementsByTagName("ang");
 		XmlNodeList vector = xDoc.GetElementsByTagName("axis");
@@ -227,14 +227,14 @@ public class DummyManager : MonoBehaviour {
 		XmlNodeList restrictions = ((XmlElement)exer[0]).GetElementsByTagName("Restrictions");
 		
 		//Rotacion inicial de la articulacion principal
-		_rotIni.x = float.ToInt16(rotI[0].Attributes["x"].InnerText);
-		_rotIni.y = float.ToInt16(rotI[0].Attributes["y"].InnerText);
-		_rotIni.z = float.ToInt16(rotI[0].Attributes["z"].InnerText);
+		_rotIni.x = Convert.ToInt16(rotI[0].Attributes["x"].InnerText);
+		_rotIni.y = Convert.ToInt16(rotI[0].Attributes["y"].InnerText);
+		_rotIni.z = Convert.ToInt16(rotI[0].Attributes["z"].InnerText);
 		
 		//Rotacion final de la articulacion principal
-		_rotEnd.x = float.ToInt16(rotE[0].Attributes["x"].InnerText);
-		_rotEnd.y = float.ToInt16(rotE[0].Attributes["y"].InnerText);
-		_rotEnd.z = float.ToInt16(rotE[0].Attributes["z"].InnerText);
+		_rotEnd.x = Convert.ToInt16(rotE[0].Attributes["x"].InnerText);
+		_rotEnd.y = Convert.ToInt16(rotE[0].Attributes["y"].InnerText);
+		_rotEnd.z = Convert.ToInt16(rotE[0].Attributes["z"].InnerText);
 		
 		/*	
 		refId = float.ToInt16(reference[0].Attributes["id"].InnerText);
@@ -262,21 +262,21 @@ public class DummyManager : MonoBehaviour {
 				G = restriction.GetElementsByTagName("grade");
 				
 				//define el hueso que vamos a tener en cuenta
-				pose.SetArt(float.ToInt16(ID[i].InnerText));
-				pose.SetArt1(float.ToInt16(ID1[i].InnerText));
+				pose.SetArt(Convert.ToInt16(ID[i].InnerText));
+				pose.SetArt1(Convert.ToInt16(ID1[i].InnerText));
 				
 				//define la posicion correcta para el ejercicio
-				Vector3 aux = new Vector3(float.ToInt16(FX[i].InnerText), 
-				                          float.ToInt16(FY[i].InnerText), 
-				                          float.ToInt16(FZ[i].InnerText));
+				Vector3 aux = new Vector3(Convert.ToInt16(FX[i].InnerText), 
+				                          Convert.ToInt16(FY[i].InnerText), 
+				                          Convert.ToInt16(FZ[i].InnerText));
 				pose.SetBone(aux);
 				
-				pose.RotIni = new Vector3(float.ToInt16(RX[i].InnerText),
-				                          float.ToInt16(RY[i].InnerText),
-				                          float.ToInt16(RZ[i].InnerText));
+				pose.RotIni = new Vector3(Convert.ToInt16(RX[i].InnerText),
+				                          Convert.ToInt16(RY[i].InnerText),
+				                          Convert.ToInt16(RZ[i].InnerText));
 				
 				//define las restricciones en angulos con respecto a la posicion correcta
-				pose.SetGrado(float.ToInt16(G[i].InnerText));
+				pose.SetGrado(Convert.ToInt16(G[i].InnerText));
 				
 				//Lista de restricciones del ejercicio
 				_poseList.Add (pose);
@@ -293,18 +293,18 @@ public class DummyManager : MonoBehaviour {
 			GameManager.instance.artEnd = artEnd;
 
 			//Angulos maximo y minimo de ejercicio
-			GameManager.instance.minimo = float.ToInt16(angles[0].Attributes["min"].InnerText);
-			GameManager.instance.maximo = float.ToInt16(angles[0].Attributes["max"].InnerText);
+			GameManager.instance.minimo = Convert.ToInt16(angles[0].Attributes["min"].InnerText);
+			GameManager.instance.maximo = Convert.ToInt16(angles[0].Attributes["max"].InnerText);
 
 			//plano sobre el que se va a realizar la medicion
-			GameManager.instance.plane = new Vector3 (float.ToInt16(vector[0].Attributes["x"].InnerText),
-			                      float.ToInt16(vector[0].Attributes["y"].InnerText),
-			                      float.ToInt16(vector[0].Attributes["z"].InnerText));
+			GameManager.instance.plane = new Vector3 (Convert.ToInt16(vector[0].Attributes["x"].InnerText),
+			                      Convert.ToInt16(vector[0].Attributes["y"].InnerText),
+			                      Convert.ToInt16(vector[0].Attributes["z"].InnerText));
 			
 			//posicion de inicio del ejercicio
-			GameManager.instance.initBone = new Vector3 (float.ToInt16(pos0[0].Attributes["x"].InnerText),
-			                         float.ToInt16(pos0[0].Attributes["y"].InnerText),
-			                         float.ToInt16(pos0[0].Attributes["z"].InnerText));
+			GameManager.instance.initBone = new Vector3 (Convert.ToInt16(pos0[0].Attributes["x"].InnerText),
+			                                             Convert.ToInt16(pos0[0].Attributes["y"].InnerText),
+			                                             Convert.ToInt16(pos0[0].Attributes["z"].InnerText));
 
 			GameManager.instance.poseList = new List<Pose>(_poseList);
 

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
 	public enum statesOfGame : int {None = -1,Calibration = 0 , LoadGame = 1, Demostration = 2,  InGame = 3 , End = 4 }
 
-	[Tooltip("Temporizador del tiempo de juego")]
+	[Tooltip("Temporizador del tiempo de ejercicio")]
 	public float timer = 0;
 	
 	[Tooltip("estado en el que se encuentra el juego 0.- Calibrado, 1.- Cargando, 2.- Demostracion del ejercicio," +
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 	[Tooltip("Posicion en la lista del ejercicio actual que se esta ejecutando. Valor -1 al inicio.")]
 	public int currentExercise = -1;
 
+	[Tooltip("Temporizador del tiempo de juego")]
 	public float TotalTime = 0;
 
 	[Tooltip("Tamaño 15.\n0. Head\n1. Neck\n2. Spine1\n3. JointLeftArm\n4. JointLeftForeArm\n5. JointLeftHand\n" +
@@ -165,7 +166,7 @@ public class GameManager : MonoBehaviour {
 	IEnumerator WaitForBegin(){
 		
 		yield return new WaitForSeconds (2f);
-		//zigfu.SetActive(true);
+
 		NextExercise();
 	}
 
@@ -206,7 +207,7 @@ public class GameManager : MonoBehaviour {
 			GameObject zigInput = GameObject.Find("ZigInputContainer");
 			if (zigInput){
 				Destroy (GameObject.Find("Zigfu"));
-				//Destroy (GameObject.Find("ZigInputContainer"));
+
 	
 			}
 			zigfu = Instantiate(zigfu) as GameObject;
@@ -261,7 +262,7 @@ public class GameManager : MonoBehaviour {
 			InfoPlayer.alExercise[currentExercise].Fail +=1;
 			
 		}
-		timer += TotalTime;
+		//timer += TotalTime;
 		InfoPlayer.alExercise[currentExercise].Duration = timer;
 
 

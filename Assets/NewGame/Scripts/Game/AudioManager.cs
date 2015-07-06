@@ -22,7 +22,6 @@ public class AudioManager : MonoBehaviour {
 	
 	void OnDisable(){
 		GameManager.OnCheckFeedBack -= SetFeedBack;
-		
 	}
 
 

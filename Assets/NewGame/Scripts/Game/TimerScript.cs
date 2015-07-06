@@ -54,6 +54,7 @@ public class TimerScript : MonoBehaviour {
 		if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame){
 			exerciseTime += Time.deltaTime;
 			GameManager.instance.TotalTime += Time.deltaTime;
+			GameManager.instance.timer += Time.deltaTime;
 			int minutes = (int)(GameManager.instance.TotalTime/60f);
 			int seconds = (int)(GameManager.instance.TotalTime%60f);
 

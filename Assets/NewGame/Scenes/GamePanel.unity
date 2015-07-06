@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: f700f3d8e6019074f9485f89d97db883, type: 3}
-    m_FontSize: 14
+    m_FontSize: 16
     m_FontStyle: 2
     m_BestFit: 0
     m_MinSize: 10
@@ -1388,16 +1388,16 @@ MonoBehaviour:
   grad:
     key0:
       serializedVersion: 2
-      rgba: 4282664191
+      rgba: 4280295625
     key1:
       serializedVersion: 2
-      rgba: 4278230783
+      rgba: 4279338702
     key2:
       serializedVersion: 2
-      rgba: 2614258
+      rgba: 2539724
     key3:
       serializedVersion: 2
-      rgba: 4521807
+      rgba: 3783233
     key4:
       serializedVersion: 2
       rgba: 0
@@ -3544,7 +3544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .0588234663, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -8691,7 +8691,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1051333535}
   m_HandleRect: {fileID: 1051333534}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8817,7 +8817,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11449066, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.r
-      value: .0588234663
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11449066, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.g
@@ -8825,7 +8825,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11449066, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11449066, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Sprite
@@ -8946,7 +8946,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11449068, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11449068, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.b
@@ -8954,11 +8954,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11449068, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.g
-      value: .955882311
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11449068, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449066, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11449070, guid: c0b6535c910df0e4daf5df258aaaf550, type: 2}
@@ -9927,7 +9931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: .955882311, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 21300000, guid: 72ae3e05650b1954e81bbd76050fedeb, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
@@ -9954,6 +9958,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7bfa6267aae4749b50f1edbe359a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grad:
+    key0:
+      serializedVersion: 2
+      rgba: 4282664191
+    key1:
+      serializedVersion: 2
+      rgba: 4278230783
+    key2:
+      serializedVersion: 2
+      rgba: 2614258
+    key3:
+      serializedVersion: 2
+      rgba: 4521807
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 21974
+    ctime2: 44140
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
   m_FillRect: {fileID: 489820892}
   m_AttachedText: {fileID: 1348467293}
   ProgressSpeed: 130
@@ -12002,7 +12049,6 @@ MonoBehaviour:
   - {fileID: 32166274}
   - {fileID: 1228262564}
   - {fileID: 789675907}
-  gameMode: -1
   player: {fileID: 534833030}
   artIni: 0
   artEnd: 0
