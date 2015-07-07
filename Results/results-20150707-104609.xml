@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<RESULTS gameMode="Custom">
+  <exercises>
+    <ExerciseResult exercise="test1.xml" time="13.95092" repetitions="12" success="12" fail="0" />
+    <ExerciseResult exercise="PruebaGiro.xml" time="32.92438" repetitions="15" success="15" fail="0" />
+  </exercises>
+</RESULTS>

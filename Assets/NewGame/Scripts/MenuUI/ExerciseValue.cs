@@ -10,10 +10,12 @@ public class ExerciseValue  {
 	float max = 0; //maximo en porcentaje que has llegado en un ejercicio. 
 	float min = 100f; // minimo en porcentaje que has llegado en un ejercicio
 
+	int instanceRepetitions;
+	float instanceTime;
+
 	public string FileName{
 		get{ return fileName;}
 		set{fileName = value;}
-
 	}
 
 
@@ -45,6 +47,17 @@ public class ExerciseValue  {
 	public float Min{
 		get {return min;}
 		set{min = value;}	
+	}
+
+	public int InstanceRepetitions{
+		get{ return instanceRepetitions;}
+		set{instanceRepetitions = value;}
+	}
+
+	public float InstanceTime{
+		get{ return instanceTime;}
+		set{instanceTime = value;}
+		
 	}
 
 }

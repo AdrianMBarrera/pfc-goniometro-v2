@@ -77,7 +77,7 @@ public class TimerScript : MonoBehaviour {
 
 		InfoPlayer.gameModes mode = InfoPlayer.gameMode;
 		
-		mode = (InfoPlayer.gameModes) 1;  //ACORDARSE DE QUITAR ESTO
+		//mode = (InfoPlayer.gameModes) 1;  //ACORDARSE DE QUITAR ESTO
 		
 		switch(mode){
 			

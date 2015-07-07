@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Xml;
+using System.IO;
 
 public class ResultManager : MonoBehaviour {
 
@@ -30,12 +33,28 @@ public class ResultManager : MonoBehaviour {
 	public Text moreInfoText;
 
 
+
+	public delegate void LoadStartClip();
+	public static event LoadStartClip OnLoadStartClip;
+
+	public delegate void LoadTextClip();
+	public static event LoadTextClip OnLoadTextClip;
+
+	public delegate void LoadProgressBarClip();
+	public static event LoadProgressBarClip OnLoadProgressBarClip;
+
+	public delegate void LoadFinalClip(float percent);
+	public static event LoadFinalClip OnLoadFinalClip;
+
+
 	
 	void Start () {
 		pb = GameObject.Find("ProgressBarLabelFollow").GetComponent<ProgressBar.ProgressBarBehaviour>();
 		StartCoroutine(ShowResults());
 		lessResults.GetComponent<Image>().enabled = false;
+		OnLoadStartClip();
 
+		SaveResults();
 	}
 
 
@@ -54,6 +73,7 @@ public class ResultManager : MonoBehaviour {
 			else if (percent >= 75)
 				FeedbackText.text = "Perfect!";
 			FeedbackText.gameObject.GetComponent<Animator>().enabled = true;
+			OnLoadFinalClip(percent);
 		}
 	}
 
@@ -63,11 +83,9 @@ public class ResultManager : MonoBehaviour {
 		int success = 0, fails = 0, reps = 0;
 		float time = 0f;
 
-
-
 		for (int i = 0; i < InfoPlayer.alExercise.Count; i++) {
 			moreInfoText.GetComponent<RectTransform>().sizeDelta = new Vector2 (moreInfoText.GetComponent<RectTransform>().sizeDelta.x,
-			                                                                    moreInfoText.GetComponent<RectTransform>().sizeDelta.y+190f);
+			                                                                    moreInfoText.GetComponent<RectTransform>().sizeDelta.y+240f);
 			success += InfoPlayer.alExercise[i].Success;
 			fails += InfoPlayer.alExercise[i].Fail;
 			reps += InfoPlayer.alExercise[i].Success + InfoPlayer.alExercise[i].Fail;
@@ -88,22 +106,26 @@ public class ResultManager : MonoBehaviour {
 		yield return new WaitForSeconds(1f);
 		TotalTime.text = string.Format("{0:00}:{1:00}", minutes ,seconds);
 		TotalTime.gameObject.GetComponent<Animator>().enabled = true;
+		OnLoadTextClip();
 //		TotalTime.gameObject.GetComponent<Animator>().SetBool("isBig", true);
 
 		yield return new WaitForSeconds(2f);
 		TotalReps.text = reps.ToString();
 		TotalReps.gameObject.GetComponent<Animator>().enabled = true;
+		OnLoadTextClip();
 
 		yield return new WaitForSeconds(2f);
 		TotalSuccess.text = success.ToString();
 		TotalSuccess.gameObject.GetComponent<Animator>().enabled = true;
+		OnLoadTextClip();
 
 		yield return new WaitForSeconds(2f);
 		TotalFails.text = fails.ToString();
 		TotalFails.gameObject.GetComponent<Animator>().enabled = true;
+		OnLoadTextClip();
 
 		yield return new WaitForSeconds(2f);
-//		pb.SetFillerSizeAsPercentage(100);
+		//pb.SetFillerSizeAsPercentage(66);
 
 		switch (InfoPlayer.gameMode) {
 
@@ -111,13 +133,24 @@ public class ResultManager : MonoBehaviour {
 				if (reps > 0)
 					percent = (success * 100) / reps;
 				pb.SetFillerSizeAsPercentage(percent);
+				OnLoadProgressBarClip();
 				//filler.color = grad.Evaluate(percent/100);
 				break;
 				
-			case (InfoPlayer.gameModes.Custom) : break;
+			case (InfoPlayer.gameModes.Custom) :
+				if (reps > 0)
+					percent = (success * 100) / reps;
+				pb.SetFillerSizeAsPercentage(percent);
+				OnLoadProgressBarClip();
+				break;
 				
 				
-			case (InfoPlayer.gameModes.Preset) : break;
+		case (InfoPlayer.gameModes.Preset) :
+			if (reps > 0)
+			percent = (success * 100) / reps;
+			pb.SetFillerSizeAsPercentage(percent);
+			OnLoadProgressBarClip();
+			break;
 			
 		}
 
@@ -140,6 +173,35 @@ public class ResultManager : MonoBehaviour {
 		_anim.SetBool("isHidden", false);
 		moreResults.GetComponent<Image>().enabled = true;
 		lessResults.GetComponent<Image>().enabled = false;
+	}
+
+
+	void SaveResults() {
+
+		Results result = new Results();
+		List<ExerciseResult> er = new List<ExerciseResult>();
+
+		string nameFile = string.Format("results-{0:yyyyMMdd-hhmmss}.xml", System.DateTime.Now);
+
+		string xmlPath =  "./Results";
+		if (!Directory.Exists(xmlPath))
+			Directory.CreateDirectory(xmlPath);
+
+		result.gameMode = InfoPlayer.gameMode.ToString();
+
+		for (int i = 0; i < InfoPlayer.alExercise.Count; i++) {
+			ExerciseResult e = new ExerciseResult();
+			e.exercise += InfoPlayer.alExercise[i].FileName;
+			e.success += InfoPlayer.alExercise[i].Success;
+			e.fail += InfoPlayer.alExercise[i].Fail;
+			e.repetitions += InfoPlayer.alExercise[i].Success + InfoPlayer.alExercise[i].Fail;
+			e.time += InfoPlayer.alExercise[i].Duration;
+			er.Add(e);
+		}
+
+		result.exercises = er;
+		
+		result.Save(Path.Combine(xmlPath, nameFile));			
 	}
 
 

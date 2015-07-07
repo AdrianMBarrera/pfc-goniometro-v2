@@ -91,6 +91,8 @@ public class ManagerPreGameUI : MonoBehaviour {
 			/*exerciseI.GetComponent<GameExerciseScript>().enabled = true;
 			instanceI.GetComponent<GameInstanceScript>().enabled = false;
 			planI.GetComponent<GamePlanScript>().enabled = false;*/
+
+			InfoPlayer.gameMode = InfoPlayer.gameModes.Open;
 			
 			_exerciseTab.colors = _cbPressed;
 			_instanceTab.colors = _cbNormal;
@@ -98,15 +100,14 @@ public class ManagerPreGameUI : MonoBehaviour {
 
 			_infoInstancePanel.GetComponent<Canvas>().enabled =false;
 
-			if (!playButtonControl)
-				CheckPlay();
-
 		}
 		
 		if (_instanceI.enabled) {
 			/*exerciseI.GetComponent<GameExerciseScript>().enabled = false;
 			instanceI.GetComponent<GameInstanceScript>().enabled = true;
 			planI.GetComponent<GamePlanScript>().enabled = false;*/
+
+			InfoPlayer.gameMode = InfoPlayer.gameModes.Custom;
 			
 			_exerciseTab.colors = _cbNormal;
 			_instanceTab.colors = _cbPressed;
@@ -128,6 +129,8 @@ public class ManagerPreGameUI : MonoBehaviour {
 			/*exerciseI.GetComponent<GameExerciseScript>().enabled = false;
 			instanceI.GetComponent<GameInstanceScript>().enabled = false;
 			planI.GetComponent<GamePlanScript>().enabled = true;*/
+
+			InfoPlayer.gameMode = InfoPlayer.gameModes.Preset;
 			
 			_exerciseTab.colors = _cbNormal;
 			_instanceTab.colors = _cbNormal;
@@ -143,6 +146,9 @@ public class ManagerPreGameUI : MonoBehaviour {
 			}
 			
 		}
+
+		if (!playButtonControl)
+			CheckPlay();
 	}
 
 

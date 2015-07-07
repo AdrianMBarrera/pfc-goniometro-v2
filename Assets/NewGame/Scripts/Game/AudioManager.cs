@@ -18,10 +18,12 @@ public class AudioManager : MonoBehaviour {
 
 	void OnEnable(){
 		GameManager.OnCheckFeedBack += SetFeedBack;
+		GameManager.OnLoadGamePhase += PlayMusic;
 	}
 	
 	void OnDisable(){
 		GameManager.OnCheckFeedBack -= SetFeedBack;
+		GameManager.OnLoadGamePhase -= PlayMusic;
 	}
 
 
@@ -48,7 +50,10 @@ public class AudioManager : MonoBehaviour {
 	}
 
 
-
+	void PlayMusic() {
+		music.clip = musicClip;
+		music.Play();
+	}
 
 
 	// Use this for initialization

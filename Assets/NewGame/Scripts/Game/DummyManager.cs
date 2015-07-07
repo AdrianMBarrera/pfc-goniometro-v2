@@ -210,10 +210,8 @@ public class DummyManager : MonoBehaviour {
 		//deleteSphere ("EndSphere");
 		
 		XmlDocument xDoc = new XmlDocument();
-		//Debug.Log (Application.dataPath);
 		xDoc.Load("./Exercises/" + name);
-		//Debug.Log(name);
-		
+
 		XmlNodeList exer = xDoc.GetElementsByTagName("EXERCISE");	  
 		artIni = Convert.ToInt16(exer[0].Attributes["initialId"].InnerText);
 		artEnd = Convert.ToInt16(exer[0].Attributes["finalId"].InnerText);

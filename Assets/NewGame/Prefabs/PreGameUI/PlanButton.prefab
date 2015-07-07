@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11492564}
   m_Layer: 5
   m_Name: PlanButton
   m_TagString: Untagged
@@ -109,6 +110,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11492564}
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11400004
@@ -162,6 +175,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Button
+--- !u!114 &11492564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3dd64ff10ba9d24e9c799e00083ca1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -106,25 +106,42 @@ public class GameManager : MonoBehaviour {
 
 		//InfoPlayer.gameModes mode = InfoPlayer.gameMode;
 
-		InfoPlayer.gameMode = InfoPlayer.gameModes.Open ;  //ACORDARSE DE QUITAR ESTO
-
 		switch(InfoPlayer.gameMode){
 
-		case(InfoPlayer.gameModes.Open): break;
+			case(InfoPlayer.gameModes.Open): 
+				break;
 
+			case (InfoPlayer.gameModes.Custom) : 
+				break;
 
-		case (InfoPlayer.gameModes.Custom) : break;
-
-
-		case (InfoPlayer.gameModes.Preset) : break;
-
+			case (InfoPlayer.gameModes.Preset) :
+				break;
 		}
 	
+	}
+
+	void LoadStats() {
+		if (stateOfGame == statesOfGame.End) {
+			Destroy(GameObject.Find("ZigInputContainer"));
+			Destroy(GameObject.Find ("Zigfu"));
+			GameObject.Find("Veil").GetComponent<LoadingScript>().BeginLevel("GameStats");
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		switch(InfoPlayer.gameMode){	
+			case(InfoPlayer.gameModes.Open): 
+				break;
+				
+			case (InfoPlayer.gameModes.Custom) : 
+				LoadStats();
+				break;
+				
+			case (InfoPlayer.gameModes.Preset) :
+				LoadStats();
+				break;
+		}
 	}
 
 
@@ -440,11 +457,10 @@ public class GameManager : MonoBehaviour {
 
 		if (isRep) {
 			if (maxAngle-15 > MathUtils.AngToPercent(angle)){
-
+				SaveStats();
 				if (OnCheckFeedBack != null){
 					OnCheckFeedBack();
 				}
-				SaveStats();
 				isRep = false;
 			}
 		}
