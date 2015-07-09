@@ -161,9 +161,10 @@ public class DummyManager : MonoBehaviour {
 		if ( OnEndExercise != null){
 			OnEndExercise();
 		}
-
-		if (GameManager.instance.stateOfGame != GameManager.statesOfGame.None) {
-			GameManager.instance.Calibrate();
+		if (Application.loadedLevelName.Equals("GamePanel")) {
+			if (GameManager.instance.stateOfGame != GameManager.statesOfGame.None) {
+				GameManager.instance.Calibrate();
+			}
 		}
 	}
 
@@ -286,44 +287,46 @@ public class DummyManager : MonoBehaviour {
 		loadSphere(IniSphere, artIni, "IniSphere");
 		//	loadSphere(EndSphere, artEnd, "EndSphere");
 
-		if (GameManager.instance.stateOfGame != GameManager.statesOfGame.None) {
-			GameManager.instance.artIni = artIni;
-			GameManager.instance.artEnd = artEnd;
+		if (Application.loadedLevelName.Equals("GamePanel")) {
+			if (GameManager.instance.stateOfGame != GameManager.statesOfGame.None) {
+				GameManager.instance.artIni = artIni;
+				GameManager.instance.artEnd = artEnd;
 
-			//Angulos maximo y minimo de ejercicio
-			GameManager.instance.minimo = Convert.ToInt16(angles[0].Attributes["min"].InnerText);
-			GameManager.instance.maximo = Convert.ToInt16(angles[0].Attributes["max"].InnerText);
+				//Angulos maximo y minimo de ejercicio
+				GameManager.instance.minimo = Convert.ToInt16(angles[0].Attributes["min"].InnerText);
+				GameManager.instance.maximo = Convert.ToInt16(angles[0].Attributes["max"].InnerText);
 
-			//plano sobre el que se va a realizar la medicion
-			GameManager.instance.plane = new Vector3 (Convert.ToInt16(vector[0].Attributes["x"].InnerText),
-			                      Convert.ToInt16(vector[0].Attributes["y"].InnerText),
-			                      Convert.ToInt16(vector[0].Attributes["z"].InnerText));
-			
-			//posicion de inicio del ejercicio
-			GameManager.instance.initBone = new Vector3 (Convert.ToInt16(pos0[0].Attributes["x"].InnerText),
-			                                             Convert.ToInt16(pos0[0].Attributes["y"].InnerText),
-			                                             Convert.ToInt16(pos0[0].Attributes["z"].InnerText));
+				//plano sobre el que se va a realizar la medicion
+				GameManager.instance.plane = new Vector3 (Convert.ToInt16(vector[0].Attributes["x"].InnerText),
+				                      Convert.ToInt16(vector[0].Attributes["y"].InnerText),
+				                      Convert.ToInt16(vector[0].Attributes["z"].InnerText));
+				
+				//posicion de inicio del ejercicio
+				GameManager.instance.initBone = new Vector3 (Convert.ToInt16(pos0[0].Attributes["x"].InnerText),
+				                                             Convert.ToInt16(pos0[0].Attributes["y"].InnerText),
+				                                             Convert.ToInt16(pos0[0].Attributes["z"].InnerText));
 
-			GameManager.instance.poseList = new List<Pose>(_poseList);
+				GameManager.instance.poseList = new List<Pose>(_poseList);
 
-			GameManager.instance.rsArray = new GameObject[_poseList.Count];
-			int i = 0;
+				GameManager.instance.rsArray = new GameObject[_poseList.Count];
+				int i = 0;
 
-			if (GameObject.Find ("Restrictions") != null)
-				Destroy (GameObject.Find ("Restrictions"));
+				if (GameObject.Find ("Restrictions") != null)
+					Destroy (GameObject.Find ("Restrictions"));
 
-			GameObject rests = new GameObject();
-			rests.name = "Restrictions";
-			foreach (Pose p in _poseList) {
-				GameManager.instance.rsArray[i] = Instantiate(GameManager.instance.restrictSphere, 
-				                                              translateArt(p.GetArt()).position,
-				                                              Quaternion.identity) as GameObject;
+				GameObject rests = new GameObject();
+				rests.name = "Restrictions";
+				foreach (Pose p in _poseList) {
+					GameManager.instance.rsArray[i] = Instantiate(GameManager.instance.restrictSphere, 
+					                                              translateArt(p.GetArt()).position,
+					                                              Quaternion.identity) as GameObject;
 
-				//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.Find("Player/" + translateArt(p.GetArt()).name).transform;
-				//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = translateArt(p.GetArt());
-				GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.FindWithTag(translateArt(p.GetArt()).name).transform;
-				GameManager.instance.rsArray[i].transform.SetParent(rests.transform);
-				i++;
+					//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.Find("Player/" + translateArt(p.GetArt()).name).transform;
+					//GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = translateArt(p.GetArt());
+					GameManager.instance.rsArray[i].GetComponent<RestrictSphereScript>().artRest = GameObject.FindWithTag(translateArt(p.GetArt()).name).transform;
+					GameManager.instance.rsArray[i].transform.SetParent(rests.transform);
+					i++;
+				}
 			}
 		}
 

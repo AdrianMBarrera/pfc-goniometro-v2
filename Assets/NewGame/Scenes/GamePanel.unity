@@ -396,7 +396,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 111223666}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: .999999464
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1257246454}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: .99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4647,7 +4647,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22300000, guid: b77825153fb12894b80801018a8e08c3, type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b77825153fb12894b80801018a8e08c3, type: 2}
@@ -8701,7 +8701,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1051333534}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: .99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9509,7 +9509,7 @@ Canvas:
     type: 2}
   m_PrefabInternal: {fileID: 697925073}
   m_GameObject: {fileID: 1550055203}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -13560,7 +13560,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 659026799}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: .999999702
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

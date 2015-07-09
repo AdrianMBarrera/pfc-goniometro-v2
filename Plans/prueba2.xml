@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<PLAN>
+  <scheduleList>
+    <Schedule>
+      <nameInstance>LeftShoulderInstance.xml</nameInstance>
+    </Schedule>
+    <Schedule>
+      <nameInstance>test.xml</nameInstance>
+    </Schedule>
+    <Schedule>
+      <nameInstance>testGiro.xml</nameInstance>
+    </Schedule>
+  </scheduleList>
+</PLAN>

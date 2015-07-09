@@ -19,7 +19,7 @@ public class TimerScript : MonoBehaviour {
 	void OnEnable(){
 		GameManager.OnCalibrationPhase += SetOn;
 		GameManager.OnInGamePhase += SetOn;
-		GameManager.OnInGamePhase += CountTime;
+		GameManager.OnDemostrationPhase += CountTime;
 		GameManager.OnDemostrationPhase += SetOff;
 	}
 	
@@ -50,18 +50,26 @@ public class TimerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-
-		if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame){
-			exerciseTime += Time.deltaTime;
-			GameManager.instance.TotalTime += Time.deltaTime;
-			GameManager.instance.timer += Time.deltaTime;
-			int minutes = (int)(GameManager.instance.TotalTime/60f);
-			int seconds = (int)(GameManager.instance.TotalTime%60f);
-
-//			_text.text = minutes.ToString("d2") + ":" + seconds.ToString("d2");
-			_text.text = string.Format("{0:00}:{1:00}", minutes ,seconds);
-
-
+		if (InfoPlayer.gameMode == InfoPlayer.gameModes.Open) {
+			if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame){
+				exerciseTime += Time.deltaTime;
+				GameManager.instance.TotalTime += Time.deltaTime;
+				GameManager.instance.timer += Time.deltaTime;
+				int minutes = (int)(GameManager.instance.TotalTime/60f);
+				int seconds = (int)(GameManager.instance.TotalTime%60f);
+				_text.text = string.Format("{0:00}:{1:00}", minutes ,seconds);
+			}
+		}
+		else {
+			if (GameManager.instance.stateOfGame == GameManager.statesOfGame.InGame){
+				exerciseTime -= Time.deltaTime;
+				GameManager.instance.TotalTime += Time.deltaTime;
+				GameManager.instance.timer += Time.deltaTime;
+				int minutes = (int)(exerciseTime/60f);
+				int seconds = (int)(exerciseTime%60f);
+				_text.text = string.Format("{0:00}:{1:00}", minutes ,seconds);
+				AnyTime();
+			}
 		}
 	}
 	
@@ -111,27 +119,36 @@ public class TimerScript : MonoBehaviour {
 
 		InfoPlayer.gameModes mode = InfoPlayer.gameMode;
 		
-		mode = (InfoPlayer.gameModes) 1;  //ACORDARSE DE QUITAR ESTO
+		mode = InfoPlayer.gameMode;
 		
 		switch(mode){
 			
-		case(InfoPlayer.gameModes.Open): 
-
-
+		case(InfoPlayer.gameModes.Open):
 			exerciseTime = 0;
 			break;
 			
-			
-			
 		case (InfoPlayer.gameModes.Custom) :
-			
+			exerciseTime = InfoPlayer.alExercise[GameManager.instance.currentExercise].InstanceTime;
 			break;
 			
-		case (InfoPlayer.gameModes.Preset) : break;
+		case (InfoPlayer.gameModes.Preset) :
+			exerciseTime = InfoPlayer.alExercise[GameManager.instance.currentExercise].InstanceTime;
+			break;
 			
 			
 		}
 
+	}
+
+
+	void AnyTime() {
+		if (InfoPlayer.gameMode != InfoPlayer.gameModes.Open) {
+			if (exerciseTime <= 0.1) {
+				GameManager.instance.SaveStats();
+				GameManager.instance.timer = 0;
+				GameManager.instance.NextExercise();
+			}
+		}
 	}
 
 

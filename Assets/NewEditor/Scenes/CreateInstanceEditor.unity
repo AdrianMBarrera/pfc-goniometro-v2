@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &46053624
 GameObject:
@@ -1365,7 +1366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &660047527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,9 +1379,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
-  ignoreReversedGraphics: 1
-  blockingObjects: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1391,7 +1391,7 @@ Canvas:
     type: 2}
   m_PrefabInternal: {fileID: 1247026144}
   m_GameObject: {fileID: 660047526}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -2066,6 +2066,10 @@ Prefab:
     - target: {fileID: 400024, guid: 8882ddd3669fa3d47b190557a97a65d8, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: 8882ddd3669fa3d47b190557a97a65d8, type: 2}
+      propertyPath: m_Name
+      value: LeftAnkle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8882ddd3669fa3d47b190557a97a65d8, type: 2}
@@ -3049,11 +3053,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 38282e15e287f1240b2b273cf5e01e24, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 38282e15e287f1240b2b273cf5e01e24, type: 2}
       propertyPath: fadeSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22300000, guid: 38282e15e287f1240b2b273cf5e01e24, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38282e15e287f1240b2b273cf5e01e24, type: 2}
@@ -3279,6 +3287,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1443443617}
   - 95: {fileID: 1443443619}
+  - 114: {fileID: 1443443618}
   m_Layer: 0
   m_Name: DummyEditorInstance
   m_TagString: Untagged
@@ -3300,6 +3309,36 @@ Transform:
   - {fileID: 216307710}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1443443618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443443616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581dacfcfff55af4c8c93b4c40c93576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IniSphere: {fileID: 100006, guid: 1233334d4956e5541800619c42859338, type: 3}
+  ReferenceSphere: {fileID: 0}
+  RestrictSphere: {fileID: 0}
+  articulations:
+  - {fileID: 1476018572}
+  - {fileID: 360948051}
+  - {fileID: 1724321414}
+  - {fileID: 2121765088}
+  - {fileID: 930784884}
+  - {fileID: 1374054200}
+  - {fileID: 1550270277}
+  - {fileID: 180370959}
+  - {fileID: 1725707906}
+  - {fileID: 2034418443}
+  - {fileID: 1175413021}
+  - {fileID: 1864400362}
+  - {fileID: 1738653796}
+  - {fileID: 277447582}
+  - {fileID: 955667014}
 --- !u!95 &1443443619
 Animator:
   serializedVersion: 3
@@ -3853,6 +3892,14 @@ Prefab:
       propertyPath: buttonPool
       value: 
       objectReference: {fileID: 236834411}
+    - target: {fileID: 22400012, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400012, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400002, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 85c19ae01d5333144a8d2ff0fea083f9, type: 2}
@@ -4701,9 +4748,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
-  ignoreReversedGraphics: 1
-  blockingObjects: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4896,7 +4942,7 @@ GameObject:
   - 23: {fileID: 1989654992}
   - 64: {fileID: 1989654991}
   m_Layer: 0
-  m_Name: LeftFoot
+  m_Name: LeftAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

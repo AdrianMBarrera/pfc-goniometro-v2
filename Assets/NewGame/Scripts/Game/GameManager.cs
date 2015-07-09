@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-	void SaveStats (){
+	public void SaveStats (){
 
 		Debug.Log ("CURRENT EXERCISE: " + currentExercise);
 
@@ -281,8 +281,6 @@ public class GameManager : MonoBehaviour {
 		}
 		//timer += TotalTime;
 		InfoPlayer.alExercise[currentExercise].Duration = timer;
-
-
 
 	}
 

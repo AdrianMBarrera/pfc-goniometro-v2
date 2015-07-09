@@ -14,7 +14,7 @@ public class SavePlanScript : MonoBehaviour {
 	void Start () {
 		helpText = GameObject.Find("HelpText").GetComponent<Text>();
 		nameFile = GameObject.Find("PlanInputField").GetComponent<InputField>();
-		mo = GameObject.Find("ManagerOrder").GetComponent<ManagerOrderScript>();
+		mo = GameObject.Find("UI").GetComponent<ManagerOrderScript>();
 	}
 	
 	// Update is called once per frame

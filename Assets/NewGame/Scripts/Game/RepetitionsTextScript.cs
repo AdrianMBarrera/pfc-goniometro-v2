@@ -42,7 +42,8 @@ public class RepetitionsTextScript : MonoBehaviour {
 	
 	void SetOff(){
 		if (InfoPlayer.gameMode != InfoPlayer.gameModes.Open)
-			_text.enabled = false;		
+			_text.enabled = false;	
+		reps = 0;
 	}
 	
 	

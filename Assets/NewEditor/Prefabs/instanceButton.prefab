@@ -28,8 +28,8 @@ GameObject:
   - 222: {fileID: 22200004}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11422368}
   m_Layer: 5
   m_Name: instanceButton
   m_TagString: Untagged
@@ -74,22 +74,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Button
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c78e65c5cc23e4aa2f7dbcf48da622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IniSphere: {fileID: 100006, guid: fa0011b6fdbf8c4429825e18fee06ab7, type: 3}
-  EndSphere: {fileID: 100006, guid: fa0011b6fdbf8c4429825e18fee06ab7, type: 3}
-  ReferenceSphere: {fileID: 100006, guid: 6ad9a536da68f6343822526e3b0913c4, type: 3}
-  RestrictSphere: {fileID: 0}
-  buttonPool: buttonPool
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,8 +125,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400006}
-        m_MethodName: LoadXml
+      - m_Target: {fileID: 11422368}
+        m_MethodName: LoadExercise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -176,6 +160,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11422368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c78e65c5cc23e4aa2f7dbcf48da622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &22200002
 CanvasRenderer:
   m_ObjectHideFlags: 1
